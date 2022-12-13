@@ -25,6 +25,8 @@ class Mood(db.Model):
     mood_name = db.Column(db.String(30), nullable=False, unique=True)
     mood_description = db.Column(db.String(50), nullable=True)
 
+
+
     def __repr__(self):
         return f'<Mood id={self.mood_id} name={self.mood_name}>'
 
