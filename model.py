@@ -4,7 +4,7 @@ db = SQLAlchemy()
 
 def connect_to_db(app, db_name):
     """connect to Database"""
-    app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql:///{db_name}"
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql:///{'fmoody'}"
     app.config["SQLALCHEMY_ECHO"] = True
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
