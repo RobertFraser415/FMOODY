@@ -2,21 +2,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-def connect_to_db(app, db_name):
-    """connect to Database"""
-    app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql:///{'fmoody'}"
-    app.config["SQLALCHEMY_ECHO"] = True
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-    db.app = app
-    db.init_app(app)
-
-if __name__ == "__main__":
-    from server import app
-
-    connect_to_db(app, "fmoody")
-
-
 class User(db.Model):
     """someone using the app"""
 
@@ -27,7 +12,7 @@ class User(db.Model):
     user_email = db.Column(db.String(100), nullable=False, unique=True)
     user_password = db.Column(db.String(100), nullable=False)
 
-    cuisine = db.relationship("Cuisine", back_populates="cuisines")
+    user_recipes = db.relationship("UserRecipe", back_populates="recipes")
     playlist = db.relationship("Playlist", back_populates="playlists")
 
     def __repr__(self):
@@ -35,17 +20,17 @@ class User(db.Model):
 
 
 
-class UserCuisine(db.Model):
-    """a users selected cuisines"""
+class UserRecipe(db.Model):
+    """a users favorite recipes"""
 
-    __tablename__ = "user_cuisines"
+    __tablename__ = "user_recipes"
 
     user_cuisine_id = db.Column(db.Integer, autoincremenr=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
-    cuisine_id = db.Column(db.Integer, db.ForeignKey("cuisines.cuisine_id"), nullable=False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipes.recipe_id"), nullable=False)
 
-    cuisines = db.relationship("Cuisine", back_populates="user_cuisines")
-    users = db.relationship("User", back_populates="user_cuisines")
+    recipes = db.relationship("Recipe", back_populates="user_recipes")
+    users = db.relationship("User", back_populates="user_recipes")
 
 class Cuisine(db.Model):
     """A style of food from a region"""
@@ -60,9 +45,6 @@ class Cuisine(db.Model):
     cuisine_playlist = db.relationship("CuisinePlaylist", back_populates="cuisines")
 
 
-
-    def __repr__(self):
-        return f'<Mood id={self.mood_id} name={self.mood_name}>'
 
 
 class CuisinePLaylist(db.Model):
@@ -88,10 +70,6 @@ class Playlist(db.Model):
     cuisine_playlist = db.relationship("CuisinePlaylist", back_populates="playlists")
 
 
-    def __repr__(self):
-        return f'<Song id={self.song_id} title={self.song_title} artist={self.artist} genre={self.genre}>'
-
-
 class Recipe(db.Model):
     """a recipe from fetch call"""
     __tablename__ = 'recipes'
@@ -114,3 +92,18 @@ class CuisineRecipe(db.Model):
 
     cuisines = db.relationship("Cuisine", back_populates="cuisine_recipes")
     recipes = db.relationship("Recipe", back_populates="cuisine_recipes")
+
+
+def connect_to_db(app, db_name):
+    """connect to Database"""
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql:///{db_name}"
+    app.config["SQLALCHEMY_ECHO"] = True
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+    db.app = app
+    db.init_app(app)
+
+if __name__ == "__main__":
+    from server import app
+
+    connect_to_db(app, "fmoody")
