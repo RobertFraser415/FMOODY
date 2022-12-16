@@ -11,9 +11,10 @@ class User(db.Model):
     user_name = db.Column(db.String(100), nullable=False)
     user_email = db.Column(db.String(100), nullable=False, unique=True)
     user_password = db.Column(db.String(100), nullable=False)
-
-    user_recipes = db.relationship("UserRecipe", back_populates="recipes")
-    playlist = db.relationship("Playlist", back_populates="playlists")
+    
+    favorites = db.relationship("Favorite", back_populates='user')
+    user_recipes_ = db.relationship("UserRecipe", back_populates="users_")
+    # playlist_ = db.relationship("Playlist", back_populates="playlists_")
 
     def __repr__(self):
         return f'<User id={self.user_id} name={self.user_name} email={self.user_email} password={self.user_password}>'
@@ -25,74 +26,84 @@ class UserRecipe(db.Model):
 
     __tablename__ = "user_recipes"
 
-    user_cuisine_id = db.Column(db.Integer, autoincremenr=True, primary_key=True)
+    user_recipe_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipes.recipe_id"), nullable=False)
 
-    recipes = db.relationship("Recipe", back_populates="user_recipes")
-    users = db.relationship("User", back_populates="user_recipes")
+    recipes_ = db.relationship("Recipe", back_populates="user_recipes_")
+    users_ = db.relationship("User", back_populates="user_recipes_")
 
 class Cuisine(db.Model):
     """A style of food from a region"""
 
     __tablename__ = 'cuisines'
 
-    cuisine_id = db.Column(db.Integer, primary_key=True, autoincremement=True)
-    cuisine_name = db.Column(db.String(30), nullable=False, unique=True)
-    cuisine_description = db.Column(db.String(50), nullable=True)
+    cuisine_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(30), nullable=False, unique=True)
+    playlist_id = db.Column(db.String(50), nullable=True)
 
-    cuisine_recipes = db.relationship("CuisineRecipe", back_populates="cuisines")
-    cuisine_playlist = db.relationship("CuisinePlaylist", back_populates="cuisines")
+   
 
+# class CuisinePlaylist(db.Model):
+#     "cuisine related playlist"
 
+#     __tablename__ = "cuisines_playlists"
 
+#     cuisine_playlist_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+#     playlist_id = db.Column(db.Integer, db.ForeignKey("playlist.playlist_id"), nullable=False)
+#     cuisine_id = db.Column(db.Integer, db.ForeignKey("cuisines.cuisine_id"), nullable=False)
 
-class CuisinePLaylist(db.Model):
-    "cuisine related playlist"
+#     cuisines_ = db.relationship("Cuisine", back_populates="cuisine_playlist_")
+#     # playlists_ = db.relationship("Playlist", back_populates="cuisine_playlist_")
 
-    __tablename__ = "cuisines_playlist"
-
-    cuisines_playlist_id = db.Column(db.Integer, autoincremenr=True, primary_key=True)
-    playlist_id = db.Column(db.Integer, db.ForeignKey("playlist.playlist_id"), nullable=False)
-    cuisine_id = db.Column(db.Integer, db.ForeignKey("cuisines.cuisine_id"), nullable=False)
-
-    cuisines = db.relationship("Cuisine", back_populates="cuisines_playlist")
-    playlist = db.relationship("Playlist", back_populates="cuisines_playlist")
-
-class Playlist(db.Model):
+# class Playlist(db.Model):
     """a list of songs from that region"""
 
-    __tablename__ = 'playlists'
+#     __tablename__ = 'playlists'
 
-    playlist_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    playlist_title = db.Column(db.String(50), nullable=False,)
+#     playlist_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#     playlist_title = db.Column(db.String(50), nullable=False,)
 
-    cuisine_playlist = db.relationship("CuisinePlaylist", back_populates="playlists")
+#     cuisine_playlist_ = db.relationship("CuisinePlaylist", back_populates="playlists_")
 
 
 class Recipe(db.Model):
     """a recipe from fetch call"""
     __tablename__ = 'recipes'
 
-    recipe_id = db.Column(db.Integer, autoincremenr=True, primary_key=True)
+    recipe_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
+    servings = db.Column(db.Integer, nullable=False)
+    readyInMinutes = db.Column(db.Integer, nullable=False)
     ingredients = db.Column(db.String(1000), nullable=False)
-    directions = db.Column(db.String(1000), nullable=False)
+    instructions = db.Column(db.String(1000), nullable=False)
 
-    cuisine_recipes = db.relationship("CuisineRecipe", back_populates="recipes")
+    user_recipes_ = db.relationship("UserRecipe", back_populates="recipes_")
+    favorites = db.relationship("Favorite", back_populates='recipe')
 
-class CuisineRecipe(db.Model):
-    """a recipe from the cuisine selection"""
+#     cuisine_recipes_ = db.relationship("CuisineRecipe", back_populates="recipes_")
 
-    __tablename__ = 'cuisine_recipes'
+# class CuisineRecipe(db.Model):
+#     """a recipe from the cuisine selection"""
 
-    cuisine_recipe_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    cuisine_id = db.Column(db.Integer, db.ForeignKey("cuisines.cuisine_id"), nullable=False)
+#     __tablename__ = 'cuisine_recipes'
+
+#     cuisine_recipe_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#     cuisine_id = db.Column(db.Integer, db.ForeignKey("cuisines.cuisine_id"), nullable=False)
+#     recipe_id = db.Column(db.Integer, db.ForeignKey("recipes.recipe_id"), nullable=False)
+
+#     cuisines_ = db.relationship("Cuisine", back_populates="cuisine_recipes_")
+#     recipes_ = db.relationship("Recipe", back_populates="cuisine_recipes_")
+
+class Favorite(db.Model):
+    __tablename__ = 'favorites'
+
+    favorite_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"), nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipes.recipe_id"), nullable=False)
 
-    cuisines = db.relationship("Cuisine", back_populates="cuisine_recipes")
-    recipes = db.relationship("Recipe", back_populates="cuisine_recipes")
-
+    user = (db.relationship("User", back_populates='favorites'))
+    recipe = (db.relationship("Recipe", back_populates='favorites'))
 
 def connect_to_db(app, db_name):
     """connect to Database"""
