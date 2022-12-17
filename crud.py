@@ -9,7 +9,6 @@ def create_user(name, email, password):
 
     return user
 
-# #?
 def create_cuisine(name, playlist_id):
     cuisine = Cuisine(name=name, playlist_id=playlist_id)
     return cuisine
@@ -23,7 +22,6 @@ def create_recipe(title , servings, readyInMinutes, original, instructions):
 def create_favorite(user_id, recipe_id):
     favorite = Favorite(user_id=user_id, recipe_id=recipe_id)
     return favorite
-    #?
 
 
 if __name__ == '__main__':
