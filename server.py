@@ -1,8 +1,9 @@
-"""Server for movie ratings app."""
+"""Server for FMOODY app."""
 
 from flask import Flask, render_template, request, flash, session, redirect
 from model import connect_to_db, db
 import crud
+import api_call
 
 from jinja2 import StrictUndefined
 
@@ -25,7 +26,8 @@ def homepage():
 def view_results(): 
     """View 3 recipes to choose from ."""
 # mkae a api call return  a jinija tamplate with 3 results
-
+    
+    recipes = api_call.api_call('mexican')
     return render_template("results.html", recipes=recipes)
 
 
@@ -90,7 +92,7 @@ def show_favorites(user_id):
 
 @app.route("/make_one")
 def show_unlogged():
-    """Shows a  user the message MAke an account ."""
+    """Shows a  user the message MAke An Account ."""
 
     return render_template("make_one.html")
 
