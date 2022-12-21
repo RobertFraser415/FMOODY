@@ -3,7 +3,29 @@
   
 </h1>
     {% for recipe in recipes %}
-    <a>{{ recipe }}</a>
-    <button class="button" type="submit" value="{{ recipe }}"></button>
+    <a>{{ recipes[recipe].get('title') }}</a>
+    <form action="/recipe_player" method="POST">
+    <p><button id = "recipe"  name="recipe" class="button recipeButton" type="submit" value="{{ recipes[recipe] }}">"{{ recipes[recipe].get('title') }}"</button></p>
+    </form>
     {% endfor %}
+<!-- <script>
+
+    const makeRequest = (event) => {
+        let request = new XMLHttpRequest();
+        let url = "/recipe_player";
+        let data = JSON.stringify(event.target.value);
+        
+        request.open("POST", url, true);
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.send(data);
+
+    }
+    let buttons = document.querySelectorAll('.recipeButton');
+
+    for(let button of buttons){
+        button.addEventListener('click', makeRequest);
+    }
+</script> -->
     
+    <!-- fetch (recipe player
+         return json so i can get() -->

@@ -1,9 +1,8 @@
-"""Server for FMOODY app."""
-
 from flask import Flask, render_template, request, flash, session, redirect
 from model import connect_to_db, db
 import crud
 import api_call
+import json
 
 from jinja2 import StrictUndefined
 
@@ -31,19 +30,35 @@ def view_results():
     return render_template("results.html", recipes=recipes)
 
 
-@app.route("/recipe_player")
+@app.route("/recipe_player", methods=['GET', 'POST'])
 def show_recipe_playlist():
     """Show a full recipe next to the music player """
+    recipe = request.form["recipe"]
+    # recipe = request.json()
+    # recipe = dict(recipe)
+    # using json.loads() method
+    result = json.loads(json.dumps(recipe))
+    # print('\n\n\n\n\n')
+    # print(recipe)
+    # print(result)
+    # print(type(result))
+    # print('\n\n\n\n\n')
 
+    print(type(recipe))
+    title = recipe.get("title")
+    # id = "recipe"  
+    # name="recipe"
+    # recipe= request.form[value]
+    print(title)
     # playlist = crud. Crete function for getting playlist from data file (movie_id)
     # recipe = crud.   get recipe from results
-    return render_template("recipe_player.html", playlist=playlist, recipe=recipe)
+    return render_template("recipe_player.html", playlist='playlist')
 
 
 
 @app.route("/save_recipe", methods=["POST"])
 def save_recipe():
-    """saves a favorite reciupe to view on the favorites page """
+    """saves a favorite recipe to view on the favorites page """
     # favorite = Favorite()  create a saved recipe  in database
     # need to check if user has already saved this previously no doubles
     # return will be  a message saying saved successfulyy 
