@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, session, redirect
+from flask import Flask, render_template, request, flash, session, redirect, jsonify
 from model import connect_to_db, db
 import crud
 import api_call
@@ -11,7 +11,7 @@ app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def homepage():
     """View homepage."""
     #new account created flashes this message 
@@ -25,8 +25,12 @@ def homepage():
 def view_results(): 
     """View 3 recipes to choose from ."""
 # mkae a api call return  a jinija tamplate with 3 results
+# need to pull argument from form here as cuisine   vvvv
+    cuisine = request.form["cuisine_selection"]
     
-    recipes = api_call.api_call('mexican')
+    recipes = api_call.api_call(cuisine)
+    for recipe in recipes:
+        recipe = jsonify(recipe)
     return render_template("results.html", recipes=recipes)
 
 
@@ -34,10 +38,34 @@ def view_results():
 def show_recipe_playlist():
     """Show a full recipe next to the music player """
     recipe = request.form["recipe"]
-    # recipe = request.json()
-    # recipe = dict(recipe)
+    recipe_str = dict(eval(recipe))
+    print(recipe_str)
+        # initializing string
+    test_string = '{"Nikhil" : 1, "Akshat" : 2, "Akash" : 3}'
+    
+    # printing original string
+    print("The original string : " + str(test_string))
+    
+    # using json.loads()
+    # convert dictionary string to dictionary
+    res = json.loads(test_string)
+
+    print(test_string)
+    
+    # print result
+    print("The converted dictionary : " + str(res))
+
+    print(recipe)
+    print(type(recipe))
+    # recipe = recipe.json()
+    # recipe_dict = dict(recipe)
+    # recipe_dict = eval(recipe)
+    eval(recipe)
+    print('###############################################')
+    # print(recipe_dict)
+
     # using json.loads() method
-    result = json.loads(json.dumps(recipe))
+    # recipe = json.loads(json.dumps(recipe))
     # print('\n\n\n\n\n')
     # print(recipe)
     # print(result)
@@ -45,11 +73,11 @@ def show_recipe_playlist():
     # print('\n\n\n\n\n')
 
     print(type(recipe))
-    title = recipe.get("title")
+    # title = recipe.get("title")
     # id = "recipe"  
     # name="recipe"
     # recipe= request.form[value]
-    print(title)
+    # print(title)
     # playlist = crud. Crete function for getting playlist from data file (movie_id)
     # recipe = crud.   get recipe from results
     return render_template("recipe_player.html", playlist='playlist')

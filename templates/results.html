@@ -1,10 +1,11 @@
 <h1>
     the jinja templapte should be a for loop here for the 3 result recipes 
+    NOW 50 RESULTS SHOULD POPULATE
   
 </h1>
     {% for recipe in recipes %}
     <a>{{ recipes[recipe].get('title') }}</a>
-    <form action="/recipe_player" method="POST">
+    <form name="recipe" action="/recipe_player" method="POST">
     <p><button id = "recipe"  name="recipe" class="button recipeButton" type="submit" value="{{ recipes[recipe] }}">"{{ recipes[recipe].get('title') }}"</button></p>
     </form>
     {% endfor %}

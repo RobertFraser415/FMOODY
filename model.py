@@ -8,16 +8,16 @@ class User(db.Model):
     __tablename__ = 'users'
 
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_name = db.Column(db.String(100), nullable=False)
-    user_email = db.Column(db.String(100), nullable=False, unique=True)
-    user_password = db.Column(db.String(100), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False, unique=True)
+    password = db.Column(db.String(100), nullable=False)
     
     favorites = db.relationship("Favorite", back_populates='user')
     user_recipes_ = db.relationship("UserRecipe", back_populates="users_")
     # playlist_ = db.relationship("Playlist", back_populates="playlists_")
 
     def __repr__(self):
-        return f'<User id={self.user_id} name={self.user_name} email={self.user_email} password={self.user_password}>'
+        return f'<User id={self.user_id} name={self.name} email={self.email} password={self.password}>'
 
 
 
@@ -73,10 +73,13 @@ class Recipe(db.Model):
 
     recipe_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
+    cuisine = db.Column(db.String(100), nullable=False)
     servings = db.Column(db.Integer, nullable=False)
     readyInMinutes = db.Column(db.Integer, nullable=False)
-    ingredients = db.Column(db.String(1000), nullable=False)
-    instructions = db.Column(db.String(1000), nullable=False)
+    ingredients = db.Column(db.String(10000), nullable=False)
+    instructions = db.Column(db.String(10000), nullable=False)
+    playlist = db.Column(db.String(100), nullable=False)
+
 
     user_recipes_ = db.relationship("UserRecipe", back_populates="recipes_")
     favorites = db.relationship("Favorite", back_populates='recipe')

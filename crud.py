@@ -14,8 +14,8 @@ def create_cuisine(name, playlist_id):
     return cuisine
 
 
-def create_recipe(title , servings, readyInMinutes, original, instructions):
-    recipe = Recipe(title=title, servings=servings, readyInMinutes=readyInMinutes, original=original, instructions=instructions)
+def create_recipe(title, cuisine, servings, readyInMinutes, ingredients, instructions, playlist):
+    recipe = Recipe(title=title, cuisine=cuisine, servings=servings, readyInMinutes=readyInMinutes, ingredients=ingredients, instructions=instructions, playlist=playlist)
     return recipe
 
 
