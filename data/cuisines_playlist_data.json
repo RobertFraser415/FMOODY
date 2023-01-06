@@ -4,7 +4,7 @@
     "playlist_id": "1DdoLLJCSkSzQMf9mY2gGN"
   },
   {
-    "name": "native american",
+    "name": "native_american",
     "playlist_id": "4AwU3LI81Th1L7oAEWywMr"
   },{
     "name": "british",
@@ -19,64 +19,64 @@
     "name": "chinese",
     "playlist_id": "3DTJZ0wPXLCUKM0R86fXAy"
   },{
-    "name": "Eastern European",
-    "playlist_id": "0e95c4CDrktxCz0mdcB5Vx"
+    "name": "eastern_european",
+    "playlist_id": "15J1CAxGWuXuHBEBazdbqR"
   },{
-    "name": "European",
-    "playlist_id": "37i9dQZF1EIee1L87f33jf"
+    "name": "european",
+    "playlist_id": "6t3ooV0nDbB46KooTrMTBz"
   },{
-    "name": "French",
+    "name": "french",
     "playlist_id": "73xZRH7MPyPZUoRkgLgnth"
   },{
-    "name": "German",
+    "name": "german",
     "playlist_id": "37i9dQZF1DWV7uP8EzLg5E"
   },{
-    "name": "Greek",
+    "name": "greek",
     "playlist_id": "37i9dQZF1DX3CjvCIWRfv0"
   },{
-    "name": "Indian",
+    "name": "indian",
     "playlist_id": "7rWLeYlgYD4YjKRdJOFEg7"
   },{
-    "name": "Irish",
+    "name": "irish",
     "playlist_id": "4WhTieny42LdYcNovXmTc8"
   },{
-    "name": "Italian",
+    "name": "italian",
     "playlist_id": "63RrPGcK9hZMFkXcR4jWxE"
   },{
-    "name": "Japanese",
+    "name": "japanese",
     "playlist_id": "0ig2IiVTh2rnTcTgHZPHPi"
   },{
-    "name": "Jewish",
+    "name": "jewish",
     "playlist_id": "3bvTqM2UeFVOh9vKEu3m1Y"
   },{
-    "name": "Korean",
+    "name": "korean",
     "playlist_id": "5j5slqdqBX7cbIITU2c0a1"
   },{
-    "name": "Latin American",
+    "name": "latin_american",
     "playlist_id": "37i9dQZF1EIfYPDTGKeXqc"
   },{
-    "name": "Mediterranean",
+    "name": "mediterranean",
     "playlist_id": "0erQqpBCFFYj0gDam2pnp1"
   },{
-    "name": "Mexican",
+    "name": "mexican",
     "playlist_id": "5mge2V5XSBwgie78ahENe2"
   },{
-    "name": "Middle Eastern",
+    "name": "middle_eastern",
     "playlist_id": "5E7yzLgfs3WyEtvJtjmLPA"
   },{
-    "name": "Nordic",
+    "name": "nordic",
     "playlist_id": "4r2twUYtviwpCpFnrfkkgM"
   },{
-    "name": "Southern",
+    "name": "southern",
     "playlist_id": "18JLzLevCD1SARF0yqXGOr"
   },{
-    "name": "Spanish",
+    "name": "spanish",
     "playlist_id": "2uWb4WpbKaBBToIvh3adG7"
   },{
-    "name": "Thai",
+    "name": "thai",
     "playlist_id": "2S4wv6Eb3EoFEtDl9pLBIg"
   },{
-    "name": "Vietnamese",
+    "name": "vietnamese",
     "playlist_id": "1NLdiNIo5OouQEqMexms3M"
   }
 ]

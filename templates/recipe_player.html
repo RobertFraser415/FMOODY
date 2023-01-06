@@ -1,22 +1,40 @@
 
     <h1>THIS IS THE PLAYER </h1>
-    <!-- <div id='player' >
+    <div id='player' >
         <iframe
         style="border-radius: 12px"
-        src="https://open.spotify.com/embed/playlist/37i9dQZF1EIfYPDTGKeXqc?utm_source=generator"
+        src="https://open.spotify.com/embed/playlist/{{recipe.playlist}}?utm_source=generator"
         width="100%"
         height="380"
         frameborder="0"
-        allowfullscreen=""
+        allowfullscreen="True"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"
-      >
+        >
       </iframe>
-    </div> -->
+    <div>
+      <button>SAVE TO FAVORITES</button>
+      <button>GO BACK AND CHOOSE SOMETHING DIFFERENT</button>
+    </div>
+    </div>
     <h2>THIS IS THE RECIPE SECTION</h2>
-    <!-- <div id='recipe_section' >
-        <div id="title">{{ recipe.get('title') }}</div>
-        <div id="servings">{{ servings }}</div>
-        <div id="readyInMinutes">{{ readyInMinutes }}</div>
-        <div id="ingredients">{{ Ingredients }}</div>
-    </div> -->
+ <div id='recipe_section' >
+        <div id="title">
+          {{ recipe.title }}
+        </div>
+        <div id="cuisine">
+          {{ recipe.cuisine }}
+        </div>
+        <div id="servings">
+          {{ recipe.servings }}
+        </div>
+        <div id="readyInMinutes">
+          {{ recipe.readyInMinutes }}
+        </div>
+        <div id="ingredients">
+          {{ recipe.ingredients }}
+        </div>
+        <div id="instructions">
+          {{ recipe.instructions }}
+        </div>
+        

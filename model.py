@@ -8,9 +8,9 @@ class User(db.Model):
     __tablename__ = 'users'
 
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), nullable=False, unique=True)
-    password = db.Column(db.String(100), nullable=False)
+    user_name = db.Column(db.String(100), nullable=False)
+    user_email = db.Column(db.String(100), nullable=False, unique=True)
+    user_password = db.Column(db.String(100), nullable=False)
     
     favorites = db.relationship("Favorite", back_populates='user')
     user_recipes_ = db.relationship("UserRecipe", back_populates="users_")
@@ -39,7 +39,7 @@ class Cuisine(db.Model):
     __tablename__ = 'cuisines'
 
     cuisine_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(30), nullable=False, unique=True)
+    name = db.Column(db.String(30), nullable=False)
     playlist_id = db.Column(db.String(50), nullable=True)
 
    
@@ -76,8 +76,8 @@ class Recipe(db.Model):
     cuisine = db.Column(db.String(100), nullable=False)
     servings = db.Column(db.Integer, nullable=False)
     readyInMinutes = db.Column(db.Integer, nullable=False)
-    ingredients = db.Column(db.String(10000), nullable=False)
-    instructions = db.Column(db.String(10000), nullable=False)
+    ingredients = db.Column(db.String(5000), nullable=False)
+    instructions = db.Column(db.String(5000), nullable=False)
     playlist = db.Column(db.String(100), nullable=False)
 
 

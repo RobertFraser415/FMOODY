@@ -26,61 +26,45 @@ def view_results():
     """View 3 recipes to choose from ."""
 # mkae a api call return  a jinija tamplate with 3 results
 # need to pull argument from form here as cuisine   vvvv
-    cuisine = request.form["cuisine_selection"]
-    
-    recipes = api_call.api_call(cuisine)
-    for recipe in recipes:
-        recipe = jsonify(recipe)
+    cuisine = request.args.get("cuisine_selection")
+    print(cuisine)
+    res = api_call.api_call(cuisine)
+    recipes = []
+    print(res)
+    for key in res.keys():
+        recipe = res[key]
+        recipes.append({
+            "title": recipe['title'], 
+            "cuisine":recipe['cuisine'], 
+            "servings": recipe['servings'], 
+            "readyInMinutes": recipe['readyInMinutes'], 
+            "ingredients" : recipe['ingredients'], 
+            "instructions" : recipe['instructions'] }) 
     return render_template("results.html", recipes=recipes)
 
 
 @app.route("/recipe_player", methods=['GET', 'POST'])
 def show_recipe_playlist():
     """Show a full recipe next to the music player """
-    recipe = request.form["recipe"]
-    recipe_str = dict(eval(recipe))
+    recipe_str = request.form["recipe"]
+
     print(recipe_str)
-        # initializing string
-    test_string = '{"Nikhil" : 1, "Akshat" : 2, "Akash" : 3}'
-    
-    # printing original string
-    print("The original string : " + str(test_string))
-    
-    # using json.loads()
-    # convert dictionary string to dictionary
-    res = json.loads(test_string)
-
-    print(test_string)
-    
-    # print result
-    print("The converted dictionary : " + str(res))
-
-    print(recipe)
-    print(type(recipe))
-    # recipe = recipe.json()
-    # recipe_dict = dict(recipe)
-    # recipe_dict = eval(recipe)
-    eval(recipe)
-    print('###############################################')
+    print('#########################################')
+    # recipe_dict = dict(eval(recipe_str))
     # print(recipe_dict)
-
-    # using json.loads() method
-    # recipe = json.loads(json.dumps(recipe))
+    # cuisine = request.form['cuisine_selection']
+    # playlist = request.form['cuisine_selection']
+    # playlist_id = crud.query_cuisine(recipe_str).playlist_id
+    recipe = crud.query_recipe(recipe_str)
+    print(recipe)
+    print(f'recipe =========== = {recipe}')
+   
+    print(recipe.title)
+    playlist = recipe.playlist
+    print(playlist)
     # print('\n\n\n\n\n')
-    # print(recipe)
-    # print(result)
-    # print(type(result))
-    # print('\n\n\n\n\n')
 
-    print(type(recipe))
-    # title = recipe.get("title")
-    # id = "recipe"  
-    # name="recipe"
-    # recipe= request.form[value]
-    # print(title)
-    # playlist = crud. Crete function for getting playlist from data file (movie_id)
-    # recipe = crud.   get recipe from results
-    return render_template("recipe_player.html", playlist='playlist')
+    return render_template("recipe_player.html", recipe=recipe)
 
 
 
@@ -96,12 +80,14 @@ def save_recipe():
 def choose_cuisine():
     """shows cuisine buttons and random to selct and take user to results """
 
-    return render_template('select_page.html')
+    return render_template('results.html')
 
 @app.route("/users", methods=["POST"])
 def register_user():
     """Create a new user."""
-
+    
+    name = request.form.get("name")
+    
     email = request.form.get("email")
     password = request.form.get("password")
 
@@ -114,7 +100,8 @@ def register_user():
         db.session.commit()
         flash("Account created! Please log in.")
 
-    return redirect("/")
+    # return redirect("/")
+    return render_template('sign_up.html')
 
 
 @app.route("/saved_favorites")
@@ -140,7 +127,7 @@ def show_unlogged():
     return render_template("make_one.html")
 
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["GET", "POST"])
 def process_login():
     """Process user login."""
 
@@ -155,7 +142,7 @@ def process_login():
         session["user_email"] = user.email
         flash(f"Welcome back, {user.email}!")
 
-    return redirect("/")
+    return render_template('login.html')
 
 # @app.route("/remove favorite", methods=["POST"])
 # def remove_favorite():
