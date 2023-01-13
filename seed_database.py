@@ -22,6 +22,7 @@ with server.app.app_context():
     for cuisine_playlist in cuisine_data:
         cuisine = cuisine_playlist.get('name').lower()
         recipes = api_call.api_call(cuisine)
+        print(recipes)
         playlist = cuisine_playlist.get('playlist_id')
 
         for recipe in recipes:
@@ -51,7 +52,7 @@ with server.app.app_context():
         user_name = f'User{n}'
         user_email = f"user{n}@test.com"  # Voila! A unique email!
         user_password = "test"
-        user = crud.create_user(name, email, password)
+        user = crud.create_user(user_name, user_email, user_password)
         model.db.session.add(user)
 
         model.db.session.add_all(cuisines_in_db)

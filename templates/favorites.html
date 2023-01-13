@@ -1,1 +1,15 @@
+{% extends 'base.html'%}
+
+{% block body %}
 <h1>THIS IS THE FAVORITES PAGE</h1>
+{% if favorites %}
+{%  for fav in favorites  %}
+
+<a>{{ fav.recipe.title }}</a>
+<form  action="/recipe_player" method="POST">
+<button id = "recipe"  name="recipe" class="button recipeButton" type="submit" value="{{ fav.recipe.title }}">"{{ fav.recipe.title }}"</button>
+</form>
+
+{%  endfor %}
+{% endif %}
+{% endblock %}

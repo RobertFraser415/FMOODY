@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, flash, session, redirect, jsonify
-from model import connect_to_db, db
+from model import connect_to_db, db, User
 import crud
 import api_call
 import json
+
 
 from jinja2 import StrictUndefined
 
@@ -14,18 +15,21 @@ app.jinja_env.undefined = StrictUndefined
 @app.route("/", methods=["GET", "POST"])
 def homepage():
     """View homepage."""
-    #new account created flashes this message 
+    # new account created flashes this message
     flash("Welcome! You can now log in!")
-#  view homepage with login and a try as a guest  button ! 
-    return render_template("homepage.html")
-
+#  view homepage with login and a try as a guest  button !
+    return render_template("homepage.html", email=session.get('user_email'))
 
 
 @app.route('/results')
-def view_results(): 
+def view_results():
     """View 3 recipes to choose from ."""
 # mkae a api call return  a jinija tamplate with 3 results
 # need to pull argument from form here as cuisine   vvvv
+    if 'user_email' in session:
+        email = session['user_email']
+    else:
+        email = None
     cuisine = request.args.get("cuisine_selection")
     print(cuisine)
     res = api_call.api_call(cuisine)
@@ -34,47 +38,64 @@ def view_results():
     for key in res.keys():
         recipe = res[key]
         recipes.append({
-            "title": recipe['title'], 
-            "cuisine":recipe['cuisine'], 
-            "servings": recipe['servings'], 
-            "readyInMinutes": recipe['readyInMinutes'], 
-            "ingredients" : recipe['ingredients'], 
-            "instructions" : recipe['instructions'] }) 
-    return render_template("results.html", recipes=recipes)
+            "title": recipe['title'],
+            "cuisine": recipe['cuisine'],
+            "servings": recipe['servings'],
+            "readyInMinutes": recipe['readyInMinutes'],
+            "ingredients": recipe['ingredients'],
+            "instructions": recipe['instructions']})
+    return render_template("results.html", recipes=recipes, email=email)
 
 
 @app.route("/recipe_player", methods=['GET', 'POST'])
 def show_recipe_playlist():
+    if 'user_email' in session:
+        email = session['user_email']
+    else:
+        email = None
+        
+    user = crud.get_user_by_email(email)
+    if user: 
+        favorites = user.favorites
+    else: favorites = None
+
     """Show a full recipe next to the music player """
     recipe_str = request.form["recipe"]
 
-    print(recipe_str)
-    print('#########################################')
-    # recipe_dict = dict(eval(recipe_str))
-    # print(recipe_dict)
-    # cuisine = request.form['cuisine_selection']
-    # playlist = request.form['cuisine_selection']
-    # playlist_id = crud.query_cuisine(recipe_str).playlist_id
+
     recipe = crud.query_recipe(recipe_str)
     print(recipe)
-    print(f'recipe =========== = {recipe}')
-   
-    print(recipe.title)
+
     playlist = recipe.playlist
     print(playlist)
-    # print('\n\n\n\n\n')
 
-    return render_template("recipe_player.html", recipe=recipe)
-
+    return render_template("recipe_player.html", recipe=recipe, email=email, favorites=favorites)
 
 
-@app.route("/save_recipe", methods=["POST"])
+@app.route("/save_recipe", methods=['POST'])
 def save_recipe():
     """saves a favorite recipe to view on the favorites page """
+    flash('Recipe was successfully saved to your favorites! YAY!!')
     # favorite = Favorite()  create a saved recipe  in database
     # need to check if user has already saved this previously no doubles
-    # return will be  a message saying saved successfulyy 
-
+    # return will be  a message saying saved successfulyy
+    if 'user_email' in session:
+        user = crud.get_user_by_email(session['user_email'])
+        user_id = user.user_id
+        print('\n\n\n',user_id, '\n\n\n')
+        recipe_id = request.form.get('recipe')
+        print(request.form)
+        # print('***********************************************', user_id, recipe_id)
+        favorite = crud.create_favorite(user_id, recipe_id)
+        db.session.add(favorite)
+        db.session.commit()
+       
+        print(f' FAVORITE =========== = {favorite}')
+        favorites = crud.get_user_favorites(user_id)
+        print(f'%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{favorites}')
+        return render_template('favorites.html', favorites=favorites)
+    else:
+        return redirect('/make_one')
 
 @app.route("/select", methods=["POST"])
 def choose_cuisine():
@@ -82,12 +103,13 @@ def choose_cuisine():
 
     return render_template('results.html')
 
+
 @app.route("/users", methods=["POST"])
 def register_user():
     """Create a new user."""
-    
+
     name = request.form.get("name")
-    
+
     email = request.form.get("email")
     password = request.form.get("password")
 
@@ -95,7 +117,7 @@ def register_user():
     if user:
         flash("Cannot create an account with that email. Try again.")
     else:
-        user = crud.create_user(email, password)
+        user = crud.create_user(name, email, password)
         db.session.add(user)
         db.session.commit()
         flash("Account created! Please log in.")
@@ -104,20 +126,21 @@ def register_user():
     return render_template('sign_up.html')
 
 
-@app.route("/saved_favorites")
-def show_favorites(user_id):
+@app.route("/favorites")
+def show_favorites():
     """Show  a users saved favorites."""
 
     email = session.get("user_email")
 
-
-    # create a remove button 
-    # if logged in , render template else
+    # create a remove button
+    # if logged in , render template favorite else not logged in route to make one
     if email:
+        current_user = crud.get_user_by_email(email)
+        favorites = [current_user.favorites]
+        print(f'favorites {favorites}')
         return render_template("favorites.html", email=email, favorites=favorites)
-    else: 
+    else:
         return render_template("make_one.html")
-
 
 
 @app.route("/make_one")
@@ -130,54 +153,50 @@ def show_unlogged():
 @app.route("/login", methods=["GET", "POST"])
 def process_login():
     """Process user login."""
+    if request.method == 'POST':
+        email = request.form.get("user_email")
+        password = request.form.get("user_password")
+        user = crud.get_user_by_email(email)
 
-    email = request.form.get("email")
-    password = request.form.get("password")
+        if not user or user.user_password != password:
+            flash("The email or password you entered was incorrect.")
+            return redirect('/login', email=session.get('user_email'))
+        else:
+            # Log in user by storing the user's email in session
+            session["user_email"] = user.user_email
+            print('logged_in')
+            email = session.get('user_email')
+            favorites = user.favorites
+            print(email)
+            flash(f"Welcome back, {user.user_name}!")
+            print(f'###############################{favorites}')
+            return render_template('favorites.html', email=email, favorites=favorites)
+    
+    return render_template('login.html', email=session.get('user_email'))
 
-    user = crud.get_user_by_email(email)
-    if not user or user.password != password:
-        flash("The email or password you entered was incorrect.")
-    else:
-        # Log in user by storing the user's email in session
-        session["user_email"] = user.email
-        flash(f"Welcome back, {user.email}!")
 
-    return render_template('login.html')
+@app.route("/logout")
+def logout():
+    flash('YOU HAVE SUCCESSFULLY LOGGED OUT ')
+    session.pop('user_email', None)
+    return redirect('/')
 
-# @app.route("/remove favorite", methods=["POST"])
-# def remove_favorite():
-#     rating_id = request.json["rating_id"]
-#     updated_score = request.json["updated_score"]
-#     crud.update_rating(rating_id, updated_score)
-#     db.session.commit()
 
-#     return "Success"
+@app.route("/add_favorite/{recipe_id}")
+def add_fav(recipe_id):
+    user_email = session.get('email')
+    user = crud.get_user_by_email(user_email)
+    # recipe_id = request.form.get('recipe')
+    print("!!!!!!!!!!!!!!!!!!!!!!!")
+    print(recipe_id)
+    favorite = crud.create_favorite(user.user_id, recipe_id)
+    db.session.add(favorite)
+    db.session.commit()
+    # return redirect('/favorites')
+    return render_template('favorites.html', favorite=favorite)
 
-# @app.route("/movies/<movie_id>/ratings", methods=["POST"])
-# def create_rating(movie_id):
-#     """Create a new rating for the movie."""
-
-#     logged_in_email = session.get("user_email")
-#     rating_score = request.form.get("rating")
-
-#     if logged_in_email is None:
-#         flash("You must log in to save a favorite recipe.")
-#     elif not rating_score:
-#         flash("Error: you didn't select a score for your rating.")
-#     else:
-#         user = crud.get_user_by_email(logged_in_email)
-#         movie = crud.get_movie_by_id(movie_id)
-
-#         rating = crud.create_rating(user, movie, int(rating_score))
-#         db.session.add(rating)
-#         db.session.commit()
-
-#         flash(f"You rated this movie {rating_score} out of 5.")
-
-#     return redirect(f"/movies/{movie_id}")
-
+# changed favorite to a list of favorites 
 
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)
-

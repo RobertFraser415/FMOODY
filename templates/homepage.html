@@ -1,5 +1,8 @@
-<h1>Hello</h1>
-<p> This is the homepage </p>
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>SELECT A CUISINE</h1>
+
 <form action="/results" method="get">
 <button class="button" type="submit" onclick="choose(this.value)" id="african" name="cuisine_selection" value="african">African </button>
 <button class="button" type="submit" onclick="choose(this.value)" id="native_american" name="cuisine_selection" value="native_american">Native American</button>
@@ -27,6 +30,7 @@
 <button class="button" type="submit" onclick="choose(this.value)" id="vietnamese" name="cuisine_selection" value="vietnamese">Vietnamese</button>
 <button class="button" type="submit" onclick="choose(this.value)" id="random" name="cuisine_selection" value="random">Random</button>
 </form>
+
 
 <style>
     .button {
@@ -57,9 +61,12 @@
 
   <script>
     function choose(evt){
-
+      console.log('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[')
       console.log(evt.target.value)
       e = evt.target.value
       return e
     }
   </script>
+
+
+{% endblock %}

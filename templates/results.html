@@ -1,14 +1,19 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
 <h1>
-    the jinja templapte should be a for loop here for the 3 result recipes 
-    NOW 25 RESULTS SHOULD POPULATE
-  
+    <!-- the jinja templapte should be a for loop here for the 3 result recipes 
+    RESULTS SHOULD POPULATE -->
+        
 </h1>
     {% for recipe in recipes %}
     <a>{{ recipe['title'] }}</a>
     <form  action="/recipe_player" method="POST">
-    <p><button id = "recipe"  name="recipe" class="button recipeButton" type="submit" value="{{ recipe['title'] }}">"{{ recipe['title'] }}"</button></p>
+    <button id = "recipe"  name="recipe" class="button recipeButton" type="submit" value="{{ recipe['title'] }}">"{{ recipe['title'] }}"</button>
     </form>
     {% endfor %}
+{% endblock %}
 <!-- <script>
 
     const makeRequest = (event) => {

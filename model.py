@@ -14,10 +14,9 @@ class User(db.Model):
     
     favorites = db.relationship("Favorite", back_populates='user')
     user_recipes_ = db.relationship("UserRecipe", back_populates="users_")
-    # playlist_ = db.relationship("Playlist", back_populates="playlists_")
 
     def __repr__(self):
-        return f'<User id={self.user_id} name={self.name} email={self.email} password={self.password}>'
+        return f'<User id={self.user_id} name={self.user_name} email={self.user_email} password={self.user_password}>'
 
 
 
@@ -118,7 +117,7 @@ class Favorite(db.Model):
 #     db.init_app(app)
 
 
-def connect_to_db(flask_app, db_uri="postgresql:///fmoody", echo=True):
+def connect_to_db(flask_app, db_uri="postgresql:///fmoody", echo=False):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

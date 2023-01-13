@@ -20,6 +20,7 @@ def create_recipe(title, cuisine, servings, readyInMinutes, ingredients, instruc
 
 
 def create_favorite(user_id, recipe_id):
+    print('\n\n\n',user_id, recipe_id, '####################################', '\n\n\n')
     favorite = Favorite(user_id=user_id, recipe_id=recipe_id)
     return favorite
 
@@ -33,6 +34,9 @@ def query_recipe(title):
 def get_user_by_email(user_email):
     return User.query.filter_by(user_email=user_email).first()
 
+def get_user_favorites(user_id):
+    # return Favorite.query.filter_by(user_id=user_id).all()
+    return User.query.filter_by(user_id=user_id).first().favorites
 
 
 if __name__ == '__main__':

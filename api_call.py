@@ -4,8 +4,8 @@ import json
 
 
 def api_call(cuisine):
-    payload = {'apiKey':'3888fcd00cc145eda0180b67fc4dd822',
-    # payload = {'apiKey':'ede5e343794c4af684778c4403cd197c',
+    # payload = {'apiKey':'3888fcd00cc145eda0180b67fc4dd822',
+    payload = {'apiKey':'ede5e343794c4af684778c4403cd197c',
     'number': 25,
     # triying jinja to fix the random button ?? 
     # {% if cuisine="random": %}
@@ -17,6 +17,9 @@ def api_call(cuisine):
     results = search.json() 
     
     recipes = results.get('recipes')
+    # print(recipes)
+    # print('###################################')
+    # print(results)
     
 
     i = 1
