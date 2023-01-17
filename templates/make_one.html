@@ -1,8 +1,53 @@
+{% extends 'base.html' %}
+{% block body %}
 <h1>
-    IF YOU WANT TO SAVE FAVORITES YOU WILL NEED TO CREATE AN ACCOUNT!!!!
+    IF YOU WANT TO SAVE FAVORITES 
+    CREATE AN ACCOUNT!
 </h1>
 
-<h1>REDIRECT TO SIGN UP PAGE BUTTON HERE</h1>
+<!--  REDIRECT TO SIGN UP PAGE BUTTON HERE -->
 
-<button>Continue As Guest</button>
-<button>Sign Up For An Account!</button>
+
+<form action="/" method="get">
+    <button class="button" type="submit" name="as_guest" class="btn btn-info">CONTINUE AS A GUEST</button>
+  </form>  
+
+  
+
+<button type="button" class="btn btn-primary sign-up-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Sign Up For an Account!
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Let's get you signed up!! mmmMMMmmm</h5>
+      </div>
+      <div class="modal-body">
+        
+        <form action="/users" method="post">
+          <div class="form-group">
+            <label for="user_name">Name</label>
+            <input type="name" class="form-control" name="name" id="user_name" aria-describedby="emailHelp" placeholder="Enter your name here">
+            <small id="emailHelp" class="form-text text-muted">This is what you liked to be called!</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" name='email' id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else. Period.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

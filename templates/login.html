@@ -15,23 +15,115 @@
                  class="form-control input-lg"
                  placeholder="Email Address"
                  required
-                 autofocus>
+                 autofocus
+                 size="40">
         </div>
       
         <div class="mt-4">
           <label for="user_password" class="sr-only">Password</label>
-          <input type="user_password"
+          <input type="password"
                  name="user_password"
                  class="form-control input-lg"
                  placeholder="Password"
-                 required>
+                 required
+                 size="40">
         </div>
       
         <button class="button" type="submit" name="sign_in">SIGN IN</button>
-        <button class="button" class="btn btn-info">CONTINUE AS A GUEST</button>
       </form>
+      <form action="/" method="get">
+        <button class="button" type="submit" name="as_guest" class="btn btn-info">CONTINUE AS A GUEST</button>
+      </form>  
+      
+      <!-- Button trigger modal -->
+<button type="button sign-up-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Sign Up For an Account!
+</button>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Let's get you signed up!! mmmMMMmmm</h5>
+      </div>
+      <div class="modal-body">
+        
+        <form action="/users" method="post">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
 
+      </div>
+    </div>
+  </div>
+</div>
+   
+
+<!-- Footer -->
+<footer class="page-footer font-small blue pt-4">
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <h5 class="text-uppercase">MmMmmFoody</h5>
+        <p>Introduce yourself to new cultures through music and cuisine, cause that's how it should be!</p>
+
+      </div>
+      <!-- Grid column -->
+
+      
+      <hr class="clearfix w-100 d-md-none pb-3">
+  
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h3 class="text-uppercase">Links</h3>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!">Link 1</a>
+          </li>
+     
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2023 Copyright:
+    <a href="/"> mmmMMMFoody.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 
       <style>
         .button {
@@ -49,6 +141,7 @@
           box-shadow: 0 9px #999;
           width: fit-content;
           margin: 30px;
+          font-family: 'Paytone One', sans-serif;
         }
         
         .button:hover {background-color: #787cf8}

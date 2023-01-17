@@ -13,6 +13,8 @@
     box-shadow: 0 9px #999;
     width: 500px;
     margin:30px;
+    /* font-family: 'Caveat', cursive; */
+    font-family: 'Paytone One', sans-serif;
   }
   
   .button:hover {background-color: #0109f3}
@@ -21,4 +23,25 @@
     background-color: #3e8e41;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
+  }
+  
+  .select_background {
+    background-image: url('/static/css/img/World MAp topographical.jpeg');
+    width: auto;
+  }
+
+  h1, h2, h3, h4, h5 {
+    /* font-family: 'Caveat', cursive; */
+    font-family: 'Paytone One', sans-serif;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .sign-up-btn {
+    font-family: 'Paytone One', sans-serif;
+    justify-content: center;
+  }
+
+  #select-a-cuisine {
+    color:teal;
   }

@@ -1,39 +1,50 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<!-- <header class="image" style="background-image: url('../img/World MAp topographical.jpeg')"></header> -->
+
+<div class="select_background" style="background-image: url('/static/css/img/World MAp topographical.jpeg')">
+
 <h1>SELECT A CUISINE</h1>
 
-<form action="/results" method="get">
-<button class="button" type="submit" onclick="choose(this.value)" id="african" name="cuisine_selection" value="african">African </button>
-<button class="button" type="submit" onclick="choose(this.value)" id="native_american" name="cuisine_selection" value="native_american">Native American</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="british" name="cuisine_selection" value="british">British</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="cajun" name="cuisine_selection" value="cajun">Cajun </button>
-<button class="button" type="submit" onclick="choose(this.value)" id="caribbean" name="cuisine_selection" value="caribbean"> Caribbean</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="chinese" name="cuisine_selection" value="chinese">Chinese </button>
-<button class="button" type="submit" onclick="choose(this.value)" id="eastern_european" name="cuisine_selection" value="eastern_european">Eastern European</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="european" name="cuisine_selection" value="european">European</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="french" name="cuisine_selection" value="french">French</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="german" name="cuisine_selection" value="german">German</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="greek" name="cuisine_selection" value="greek">Greek</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="indian" name="cuisine_selection" value="indian">Indian</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="italian" name="cuisine_selection" value="italian">Italian</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="japanese" name="cuisine_selection" value="japanese">Japanese</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="korean" name="cuisine_selection" value="korean">Korean</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="latin_american" name="cuisine_selection" value="latin_american">Latin American</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="mediterranean" name="cuisine_selection" value="mediterranean">Mediterranean</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="mexican" name="cuisine_selection" value="mexican">Mexican</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="middle_eastern" name="cuisine_selection" value="middle_eastern">Middle Eastern</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="nordic" name="cuisine_selection" value="nordic">Nordic</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="southern" name="cuisine_selection" value="southern">Southern</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="spanish" name="cuisine_selection" value="spanish">Spanish</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="thai" name="cuisine_selection" value="thai">Thai</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="vietnamese" name="cuisine_selection" value="vietnamese">Vietnamese</button>
-<button class="button" type="submit" onclick="choose(this.value)" id="random" name="cuisine_selection" value="random">Random</button>
+<form action="/results" method="get" class="buttons_background">
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="african" name="cuisine_selection" value="african">African </button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="native_american" name="cuisine_selection" value="native_american">American</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="british" name="cuisine_selection" value="british">British</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="cajun" name="cuisine_selection" value="cajun">Cajun </button>
+<!-- <button class="cuisine_button" type="submit" onclick="choose(this.value)" id="caribbean" name="cuisine_selection" value="caribbean"> Caribbean</button> -->
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="chinese" name="cuisine_selection" value="chinese">Chinese </button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="eastern_european" name="cuisine_selection" value="eastern_european">Eastern European</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="european" name="cuisine_selection" value="european">European</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="french" name="cuisine_selection" value="french">French</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="german" name="cuisine_selection" value="german">German</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="greek" name="cuisine_selection" value="greek">Greek</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="indian" name="cuisine_selection" value="indian">Indian</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="italian" name="cuisine_selection" value="italian">Italian</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="japanese" name="cuisine_selection" value="japanese">Japanese</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="korean" name="cuisine_selection" value="korean">Korean</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="latin_american" name="cuisine_selection" value="latin_american">Latin American</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="mediterranean" name="cuisine_selection" value="mediterranean">Mediterranean</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="mexican" name="cuisine_selection" value="mexican">Mexican</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="middle_eastern" name="cuisine_selection" value="middle_eastern">Middle Eastern</button>
+<!-- <button class="cuisine_button" type="submit" onclick="choose(this.value)" id="nordic" name="cuisine_selection" value="nordic">Nordic</button> -->
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="southern" name="cuisine_selection" value="southern">Southern</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="spanish" name="cuisine_selection" value="spanish">Spanish</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="thai" name="cuisine_selection" value="thai">Thai</button>
+<button class="cuisine_button" type="submit" onclick="choose(this.value)" id="vietnamese" name="cuisine_selection" value="vietnamese">Vietnamese</button>
+<!-- <button class="cuisine_button" type="submit" onclick="choose(this.value)" id="random" name="cuisine_selection" value="random">Random</button> -->
 </form>
+</div>
+
+
+
+
 
 
 <style>
-    .button {
+    .cuisine_button {
+      /* font-family: 'Caveat', cursive 900; */
+      font-family: 'Paytone One', sans-serif;
       display: inline-block;
       padding: 15px 25px;
       font-size: 24px;

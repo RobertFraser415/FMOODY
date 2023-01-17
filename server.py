@@ -66,8 +66,8 @@ def show_recipe_playlist():
     recipe = crud.query_recipe(recipe_str)
     print(recipe)
 
-    playlist = recipe.playlist
-    print(playlist)
+    # playlist = recipe.playlist_id
+    # print(playlist)
 
     return render_template("recipe_player.html", recipe=recipe, email=email, favorites=favorites)
 
@@ -112,7 +112,7 @@ def register_user():
 
     email = request.form.get("email")
     password = request.form.get("password")
-
+    print(name, email, password, '################################')
     user = crud.get_user_by_email(email)
     if user:
         flash("Cannot create an account with that email. Try again.")
@@ -160,7 +160,7 @@ def process_login():
 
         if not user or user.user_password != password:
             flash("The email or password you entered was incorrect.")
-            return redirect('/login', email=session.get('user_email'))
+            return redirect('/login')#, email=session.get('user_email')
         else:
             # Log in user by storing the user's email in session
             session["user_email"] = user.user_email
@@ -172,7 +172,8 @@ def process_login():
             print(f'###############################{favorites}')
             return render_template('favorites.html', email=email, favorites=favorites)
     
-    return render_template('login.html', email=session.get('user_email'))
+    return render_template('login.html')
+    # , email=session.get('user_email')
 
 
 @app.route("/logout")
