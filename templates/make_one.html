@@ -9,12 +9,12 @@
 
 
 <form action="/" method="get">
-    <button class="button" type="submit" name="as_guest" class="btn btn-info">CONTINUE AS A GUEST</button>
+    <button class="button glow" type="submit" name="as_guest" class="btn btn-info">CONTINUE AS A GUEST</button>
   </form>  
 
   
 
-<button type="button" class="btn btn-primary sign-up-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="glow btn btn-primary sign-up-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Sign Up For an Account!
 </button>
 
@@ -24,25 +24,29 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Let's get you signed up!! mmmMMMmmm</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
       </div>
       <div class="modal-body">
         
         <form action="/users" method="post">
-          <div class="form-group">
+          <div class="center form-group">
             <label for="user_name">Name</label>
             <input type="name" class="form-control" name="name" id="user_name" aria-describedby="emailHelp" placeholder="Enter your name here">
-            <small id="emailHelp" class="form-text text-muted">This is what you liked to be called!</small>
+            <small class="form-text text-muted">This is what you liked to be called!</small>
           </div>
-          <div class="form-group">
+          <div class="center form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" name='email' id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else. Period.</small>
           </div>
-          <div class="form-group">
+          <div class="center form-group">
             <label for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="center glow btn btn-primary">Submit</button>
+          <button type="cancel" class="btn btn-outline-danger">Cancel</button>
         </form>
 
       </div>

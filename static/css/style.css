@@ -145,3 +145,7 @@ input {
   padding: 1rem 1rem;
   vertical-align: middle;
 }
+
+.navbar-custom-theme {
+  background: linear-gradient(to left, #01f778, #f90a86);
+}
