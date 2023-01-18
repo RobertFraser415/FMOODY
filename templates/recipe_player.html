@@ -3,7 +3,8 @@
 {% block body %}
 
 <h1>THIS IS THE PLAYER</h1>
-<div id="player">
+<div class="container center">
+<div class="in_line" id="player">
   <iframe
     style="border-radius: 12px"
     src="https://open.spotify.com/embed/playlist/{{recipe.playlist}}?utm_source=generator"
@@ -20,34 +21,37 @@
     <!-- <button id = "recipe"  name="recipe" class="button recipeButton" type="submit" value="{{ recipe['title'] }}">"{{ recipe['title'] }}"</button> -->
 
         <!-- <input id="recipe" name= "recipe_btn" class="button" type="submit" value="{{ recipe.recipe_id }}">SAVE TO FAVORITES -->
-        <button id="recipe_btn" name= "recipe" class="button" type="submit" value="{{ recipe.recipe_id }}">SAVE TO FAVORITES</button> 
-
+        <button id="recipe_btn" name= "recipe" class="button glow_pink" type="submit" value="{{ recipe.recipe_id }}">SAVE TO FAVORITES</button> 
+       
   </form>
     <form action="/" methods="get">
       <button class="button" type="submit">GO BACK AND CHOOSE SOMETHING DIFFERENT</button>
     </form>
   </div>
-</div>
-<h2>THIS IS THE RECIPE SECTION</h2>
-<div id="recipe_section">
+
+<div class="in_line " id="recipe_section">
+  <h2>THIS IS THE RECIPE SECTION</h2>
   <div id="title">{{ recipe.title }}</div>
   <div id="cuisine">
     <h2>This cuisine is {{ recipe.cuisine }}</h2>
   </div>
   <div id="servings">
-    <h2>Makes {{ recipe.servings }} Servings</h2>
+    <label for="servings"># of Servings:</label>
+    <h2 name="servings">Makes {{ recipe.servings }} Servings</h2>
   </div>
   <div id="readyInMinutes">
-    <h2>This recipe takes {{ recipe.readyInMinutes }} minutes to prepare.</h2>
+    <label for="time">Time needed to prepare:</label>
+    <h2 name="time">This recipe takes {{ recipe.readyInMinutes }} minutes to prepare.</h2>
   </div>
   <div id="ingredients">
-    <h2>Ingredients :</h2>
-    <h3>{{ recipe.ingredients }}</h3>
+    <label for="ing">Ingredients</label>
+    <h3 name="ing">{{ recipe.ingredients }}</h3>
   </div>
   <div id="instructions">
     <h2>Instructions :</h2>
     {{ recipe.instructions }}
   </div>
+</div>
 </div>
 
 <!-- <script>

@@ -122,8 +122,7 @@ def register_user():
         db.session.commit()
         flash("Account created! Please log in.")
 
-    # return redirect("/")
-    return render_template('sign_up.html')
+    return redirect("/")
 
 
 @app.route("/favorites")

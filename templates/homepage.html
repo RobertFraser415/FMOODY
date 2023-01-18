@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 
 {% block body %}
+
+
+
 <!-- <header class="image" style="background-image: url('../img/World MAp topographical.jpeg')"></header> -->
 
 <div class="select_background" style="background-image: url('/static/css/img/World MAp topographical.jpeg')">
 
-<h1>SELECT A CUISINE</h1>
+
+
+<h1 class="glow_small">SELECT A CUISINE</h1>
 
 <form action="/results" method="get" class="buttons_background">
 <button class="cuisine_button" type="submit" onclick="choose(this.value)" id="african" name="cuisine_selection" value="african">African </button>

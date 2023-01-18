@@ -2,14 +2,14 @@
 
 {% block body %}
 
-<h1 id="'select-a-cuisine">
+<h1 class="" id="'select-a-cuisine">
 Now lets choose a recipe!
         
 </h1>
     {% for recipe in recipes %}
     <a>{{ recipe['title'] }}</a>
     <form  action="/recipe_player" method="POST">
-    <button id = "recipe"  name="recipe" class="button recipeButton" type="submit" value="{{ recipe['title'] }}">"{{ recipe['title'] }}"</button>
+    <button id = "recipe"  name="recipe" class="button recipeButton glow" type="submit" value="{{ recipe['title'] }}">"{{ recipe['title'] }}"</button>
     </form>
     {% endfor %}
 {% endblock %}

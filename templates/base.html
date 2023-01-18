@@ -11,13 +11,14 @@
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
       crossorigin="anonymous"
     />
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet"> -->
+    
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Paytone+One&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
     <link rel="stylesheet" href="/static/css/style.css"/> 
     
@@ -31,6 +32,11 @@
     
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
+
+
+        <a class="navbar-brand" href="#">
+          <img src="/static/css/img/dine sign.png" width="150" height="100" alt="mmm Foodie">
+        </a>
         <a class="navbar-brand" href="#">MmMmmFoody</a>
         <!-- <img src="/static/img/ubermelon-logo.png" alt="" width="30" height="24"> -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,16 +65,15 @@
                 Features Coming Soon
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#" id="find_restaurant">Find a restaurant!</a></li>
-                <li><a class="dropdown-item" href="#">Explore Music</a></li>
+                <li><a class="dropdown-item" href="https://www.yelp.com" id="find_restaurant">Find a restaurant!</a></li>
+                <li><a class="dropdown-item" href="https://www.spotify.com">Explore Music</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href="https://www.gmail.com">Get In Touch!</a></li>
               </ul>
         
         </div>
       </div>
     </nav>
-
     {% for msg in get_flashed_messages() %}
     <p class="flash-msg">{{ msg }}</p>
     {% endfor %} {% block body %}{% endblock %} {% block after_body %}

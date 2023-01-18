@@ -45,3 +45,103 @@
   #select-a-cuisine {
     color:teal;
   }
+
+  * {
+    font-family: 'Paytone One', sans-serif;
+  }
+
+  .flash-msg {
+    font-family: 'Caveat', cursive;
+  }
+
+
+.glow {
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #0077e6, 0 0 40px #0077e6, 0 0 50px #0077e6, 0 0 60px #0077e6, 0 0 70px #0077e6;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #999, 0 0 40px #999, 0 0 50px #999, 0 0 60px #999, 0 0 70px #999, 0 0 80px #999;
+  }
+}
+
+.glow_small {
+  font-size: 80px;
+  color: #fff;
+  text-align: center;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #0109f3, 0 0 40px #0109f3, 0 0 50px #0109f3, 0 0 60px #0109f3, 0 0 70px #0109f3;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px aqua, 0 0 40px aqua, 0 0 50px aqua, 0 0 60px aqua, 0 0 70px aqua, 0 0 80px aqua;
+  }
+}
+
+.glow_pink {
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    animation: glow 1s ease-in-out infinite alternate;
+  }
+  
+  /* @-webkit-keyframes glow {
+    from {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+    }
+    
+    to {
+      text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+    }
+  }
+} */
+/* .glow_purple {
+  font-size: 30px;
+  color: #fff;
+  text-align: center;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px rgb(153, 4, 146), 0 0 40px rgb(153,4,146), 0 0 50px rgb(153,4,146), 0 0 60px rgb(153,4,146), 0 0 70px rgb(153,4,146);
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px goldenrod, 0 0 40px goldenrod, 0 0 50px goldenrod, 0 0 60px goldenrod, 0 0 70px goldenrod, 0 0 80px goldenrod;
+  } 
+}*/
+input {
+  flex: 0 1 100px;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.container {
+  border: blue 3px;
+  margin: 1rem;
+  padding: 2rem 2rem;
+  text-align: center;
+}
+
+.in_line {
+  display: inline-block;
+  border: 1px solid red;
+  padding: 1rem 1rem;
+  vertical-align: middle;
+}
