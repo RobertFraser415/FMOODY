@@ -28,7 +28,7 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <body>
+  <body class="background_gradient">
     
     <nav class="navbar-custom-theme navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
@@ -37,12 +37,12 @@
         <a class="navbar-brand" href="#">
           <img src="/static/css/img/dine sign.png" width="150" height="100" alt="mmm Foodie">
         </a>
-        <a class="navbar-brand" href="#">MmMmmFoody</a>
+        <a class=" glow navbar-brand" href="#">MmMmmFoody</a>
         <!-- <img src="/static/img/ubermelon-logo.png" alt="" width="30" height="24"> -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse center" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/">Home</a>
@@ -75,22 +75,16 @@
       </div>
     </nav>
     {% for msg in get_flashed_messages() %}
-    <p class="flash-msg">{{ msg }}</p>
+    <p class="flash-msg center">{{ msg }}</p>
     {% endfor %} {% block body %}{% endblock %} {% block after_body %}
 
     <footer class="page-footer font-small blue pt-4">
 
       <!-- Footer Links -->
-      <div class="container-fluid text-center text-md-left">
-    
-        <!-- Grid row -->
-    
-          <!-- Grid column -->
-          <div class="col-md-4 mt-md-0 mt-3">
+ 
     
             <!-- Content -->
-            <h5 class="text-uppercase">MmMmmFoody</h5>
-            <i>Introduce yourself to new cultures through music and cuisine, cause that's how it should be!</i>
+      
     
           </div>
           <!-- Grid column -->

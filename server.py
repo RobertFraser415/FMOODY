@@ -62,9 +62,12 @@ def show_recipe_playlist():
     """Show a full recipe next to the music player """
     recipe_str = request.form["recipe"]
 
-
     recipe = crud.query_recipe(recipe_str)
-    print(recipe)
+    # /string stuff
+
+    print(recipe.ingredients)
+    print(type(recipe.ingredients))
+    # make it a list if commas and } in sting remove carly
 
     # playlist = recipe.playlist_id
     # print(playlist)
