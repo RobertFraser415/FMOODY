@@ -64,10 +64,15 @@ def show_recipe_playlist():
 
     recipe = crud.query_recipe(recipe_str)
     # /string stuff
-
     print(recipe.ingredients)
     print(type(recipe.ingredients))
+    recipe.ingredients[1:-2]
+    just_quotes = recipe.split(',')
+
+    # recipe.split() => [“1/2 cornmeal”, “1/2 teaspoon salt”...]
+    # loop over split list  
     # make it a list if commas and } in sting remove carly
+    # jinja template for loop for bulletpoints 
 
     # playlist = recipe.playlist_id
     # print(playlist)
