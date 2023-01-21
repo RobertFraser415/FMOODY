@@ -1,9 +1,9 @@
 {% extends 'base.html'%} {% block body %}
 
 <div class="container center">
-  <h1>This playlist is the Traditional Music from that cuisines region</h1>
   <div class="row" id="player">
     <div class="col">
+      <h1>Traditional Music from this cuisines region</h1>
     <iframe
       style="border-radius: 12px"
       src="https://open.spotify.com/embed/playlist/{{recipe.playlist}}?utm_source=generator"
@@ -23,15 +23,15 @@
         <button
           id="recipe_btn"
           name="recipe"
-          class="button glow_pink"
+          class="button glow go-to-fav"
           type="submit"
           value="{{ recipe.recipe_id }}"
         >
-          SAVE TO FAVORITES
+          SAVE TO FAVORITES ❤️
         </button>
       </form>
       <form action="/" methods="get">
-        <button class="button" type="submit">
+        <button class="button center" type="submit">
           GO BACK AND CHOOSE SOMETHING DIFFERENT
         </button>
       </form>
@@ -39,8 +39,9 @@
   </div>
   <div class="col">
     <div id="recipe_section">
-      <h2>THIS IS THE RECIPE SECTION</h2>
-      <div class="glow" id="title">{{ recipe.title }}</div>
+   
+      <div class="glow h" id="title">{{ recipe.title }}</div>
+      <div><img src="{{recipe.image}}" alt=""></div>
       <div id="cuisine">
         <h2>This cuisine is {{ recipe.cuisine }}</h2>
       </div>
@@ -55,8 +56,12 @@
         </h2>
       </div>
       <div id="ingredients">
-        <label for="ing">Ingredients</label>
-        <h3 name="ing">{{ recipe.ingredients }}</h3>
+        <ul >
+        <label for="ing" class="h">Ingredients</label>
+        {%  for ing in ingredients: %}
+        <li class="ing-width" name="ing">{{ ing }}</li>
+        {% endfor %}
+      </ul>
       </div>
       <div id="instructions">
         <h2>Instructions :</h2>
@@ -65,28 +70,10 @@
     </div>
   </div>
 
-  <!-- <script>
-
-const save_button = document.querySelector('#recipe_btn');
- 
-save_button.addEventListener("click", (e) => { 
-    e.preventDefault();
-      console.log(e.target.value, 'this is printing **********************************')
-    
-  })
 
 
 
-</script> -->
-  <!-- this is built into the form so not needed ...  -->
-  <!-- <script>
-  function choose(evt){
 
-    console.log(evt.target.value);
-    e = evt.target.value
-    return e
-  }
-</script> -->
 
   {% endblock %}
 </div>

@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="center">
-          <h1>Welcome to MmMmmFoody!!</h1>
+          <h1>Welcome to MmMmmFoodie!!</h1>
           <br>
           <h3 class="text-center center">Introduce yourself to new cultures through music and cuisine,</h3> 
             <n\>
@@ -50,8 +50,8 @@
       </form>  
       
       <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary sign-up-btn glow" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Sign Up For an Account!
+<button type="button" class="btn btn-primary sign-up-btn glow button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  SIGN UP FOR AN ACCOUNT!
 </button>
 </div>
 <!-- Modal -->
@@ -63,7 +63,7 @@
       </div>
       <div class="modal-body">
         
-        <form action="/users" method="post">
+        <form action="/users" method="post" class="center">
           <div class="form-group">
             <label for="user_name">Name</label>
             <input type="name" class="form-control" name="name" id="user_name" aria-describedby="emailHelp" placeholder="Enter your name here">
@@ -78,8 +78,8 @@
             <label for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
           </div>
-          <button type="submit" class="btn btn-primary glow">Submit</button>
-          <button type="Cancel" class="btn btn-outline-danger">Cancel</button>
+            <button type="submit" class="btn btn-primary glow">Submit</button>
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
         </form>
 
       </div>

@@ -3,6 +3,7 @@ from model import connect_to_db, db, User
 import crud
 import api_call
 import json
+import re
 
 
 from jinja2 import StrictUndefined
@@ -39,6 +40,7 @@ def view_results():
         recipe = res[key]
         recipes.append({
             "title": recipe['title'],
+            "image": recipe['image'],
             "cuisine": recipe['cuisine'],
             "servings": recipe['servings'],
             "readyInMinutes": recipe['readyInMinutes'],
@@ -64,10 +66,23 @@ def show_recipe_playlist():
 
     recipe = crud.query_recipe(recipe_str)
     # /string stuff
-    print(recipe.ingredients)
-    print(type(recipe.ingredients))
-    recipe.ingredients[1:-2]
-    just_quotes = recipe.split(',')
+    # print(recipe.ingredients)
+    # string_ingredients = recipe.ingredients.strip("{").strip("}").strip(' " ').split(",")
+    
+    
+    string_ingredients = recipe.ingredients
+    clean_ingredients = re.sub("[^a-zA-Z//\d/,g\s]+", "",string_ingredients)
+    print(clean_ingredients)
+    split_ingredients = clean_ingredients.split(",")
+    final_ingredients = [ing.strip() for ing in split_ingredients]
+    for ing in final_ingredients:
+        print("-", ing)
+
+    
+    # print(string_ingredients[0],",", string_ingredients[1])
+    # print(json.loads(string_ingredients))
+
+    # for i in just_quotes:
 
     # recipe.split() => [“1/2 cornmeal”, “1/2 teaspoon salt”...]
     # loop over split list  
@@ -77,7 +92,7 @@ def show_recipe_playlist():
     # playlist = recipe.playlist_id
     # print(playlist)
 
-    return render_template("recipe_player.html", recipe=recipe, email=email, favorites=favorites)
+    return render_template("recipe_player.html", recipe=recipe, email=email, favorites=favorites,  ingredients=final_ingredients) 
 
 
 @app.route("/save_recipe", methods=['POST'])
@@ -90,10 +105,11 @@ def save_recipe():
     if 'user_email' in session:
         user = crud.get_user_by_email(session['user_email'])
         user_id = user.user_id
-        print('\n\n\n',user_id, '\n\n\n')
+        # print('\n\n\n',user_id, '\n\n\n')
         recipe_id = request.form.get('recipe')
         print(request.form)
         # print('***********************************************', user_id, recipe_id)
+        
         favorite = crud.create_favorite(user_id, recipe_id)
         db.session.add(favorite)
         db.session.commit()
@@ -123,12 +139,12 @@ def register_user():
     print(name, email, password, '################################')
     user = crud.get_user_by_email(email)
     if user:
-        flash("Cannot create an account with that email. Try again.")
+        flash("Cannot create an account. This email already exsist. Try again.")
     else:
         user = crud.create_user(name, email, password)
         db.session.add(user)
         db.session.commit()
-        flash("Account created! Please log in.")
+        flash("Account created! You are logged in.")
 
     return redirect("/")
 
@@ -190,20 +206,54 @@ def logout():
     return redirect('/')
 
 
-@app.route("/add_favorite/{recipe_id}")
-def add_fav(recipe_id):
-    user_email = session.get('email')
-    user = crud.get_user_by_email(user_email)
-    # recipe_id = request.form.get('recipe')
-    print("!!!!!!!!!!!!!!!!!!!!!!!")
-    print(recipe_id)
-    favorite = crud.create_favorite(user.user_id, recipe_id)
-    db.session.add(favorite)
-    db.session.commit()
-    # return redirect('/favorites')
-    return render_template('favorites.html', favorite=favorite)
+# @app.route("/add_favorite/{recipe_id}")
+# def add_fav(recipe_id):
+#     user_email = session.get('email')
+#     user = crud.get_user_by_email(user_email)
+#     # recipe_id = request.form.get('recipe')
+#     print("!!!!!!!!!!!!!!!!!!!!!!!")
+#     print(recipe_id)
+#     favorite = crud.create_favorite(user.user_id, recipe_id)
+#     db.session.add(favorite)
+#     db.session.commit()
+#     # return redirect('/favorites')
+#     return render_template('favorites.html', favorite=favorite)
 
-# changed favorite to a list of favorites 
+
+# @app.route("/add_recipe", methods=['POST'])
+# def add_recipe():
+#     # """saves a favorite recipe to view on the favorites page """
+#     """saves a favorite recipe to the database then redirect to favorites page """
+#         # favorite = Favorite()  create a saved recipe  in database
+#     # need to check if user has already saved this previously no doubles
+#     # return will be  a message saying saved successfulyy
+#     if 'user_email' in session:
+#         user = crud.get_user_by_email(session['user_email'])
+#         user_id = user.user_id
+#         # recipe_id = recipe.recipe_id
+#         title = request.form.get("title-form")
+#         cuisine = request.form.get("cuisine-form")
+#         servings = request.form.get("servings-form")
+#         readyInMinutes = request.form.get("readyInMinutes-form")
+#         ingredients = request.form.get("ingredients-form")
+#         instructions = request.form.get("instructions-form")
+
+#         recipe_id = request.form.get('recipe')
+#         # print(request.form)
+#         # print('***********************************************', user_id, recipe_id)
+#         recipe_to_add = crud.create_recipe(title, cuisine, servings, readyInMinutes, ingredients, instructions, playlist='37i9dQZF1DX4UtSsGT1Sbe')
+#         db.session.add(recipe_to_add)
+#         db.session.commit()
+
+#         # added_recipe = crud.create_favorite(user_id, recipe_id)
+#         # db.session.add(added_recipe)
+#         # db.session.commit()
+#         favorites = crud.get_user_favorites(user_id)
+#         print(f'%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{favorites}')
+#         return render_template('favorites.html', favorites=favorites)
+#     else:
+#         return redirect('/make_one')
+
 
 if __name__ == "__main__":
     connect_to_db(app)

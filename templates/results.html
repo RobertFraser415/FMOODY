@@ -1,20 +1,47 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block body %}
 
-{% block body %}
+<h1 class="center" id="'select-a-recipe">Now lets choose a recipe!</h1>
 
-<h1 class="center" id="'select-a-recipe">
-Now lets choose a recipe!     
-</h1>
 {% for recipe in recipes %}
 <div class="center">
-<a>{{ recipe['title'] }}</a>
-    <form  action="/recipe_player" method="POST">
-    <button id = "recipe"  name="recipe" class="button recipeButton glow" type="submit" value="{{ recipe['title'] }}">"{{ recipe['title'] }}"</button>
-    </form>
+  <a>{{ recipe['title'] }}</a>
+  <form action="/recipe_player" method="POST">
+    <div class="center glow">
+      <img class="result_image" src="{{ recipe['image'] }}" alt="" />
+      <button
+        id="recipe"
+        name="recipe"
+        class="button recipeButton glow"
+        type="submit"
+        value="{{ recipe['title'] }}"
+      >
+        "{{ recipe['title'] }}"
+      </button>
+    </div>
+  </form>
 </div>
-    {% endfor %}
-{% endblock %}
-<!-- <script>
+{% endfor %}
+<h1 class="center">TOO HARD TO CHOOSE ?!</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <form action="/" methods="get">
+        <button class="button col center" type="submit">
+          GO BACK AND SELECT ANOTHER CUISINE
+        </button>
+      </form>
+    </div>
+    <div class="col-sm">
+      <form action="/favorites" method="GET">
+        <button class="button glow btn-outline-info fav-btn" type="submit">
+          GO TO MY FAVORITES
+        </button>
+      </form>
+    </div>
+  </div>
+
+  {% endblock %}
+  <!-- <script>
 
     const makeRequest = (event) => {
         let request = new XMLHttpRequest();
@@ -32,6 +59,7 @@ Now lets choose a recipe!
         button.addEventListener('click', makeRequest);
     }
 </script> -->
-    
-    <!-- fetch (recipe player
+
+  <!-- fetch (recipe player
          return json so i can get() -->
+</div>

@@ -4,8 +4,8 @@ import json
 
 
 def api_call(cuisine):
-    # payload = {'apiKey':'3888fcd00cc145eda0180b67fc4dd822',
-    payload = {'apiKey':'ede5e343794c4af684778c4403cd197c',
+    payload = {'apiKey':'3888fcd00cc145eda0180b67fc4dd822',
+    # payload = {'apiKey':'ede5e343794c4af684778c4403cd197c',
     'number': 25,
     # triying jinja to fix the random button ?? 
     # {% if cuisine="random": %}
@@ -29,6 +29,7 @@ def api_call(cuisine):
 
         title = recipe.get('title')
         # title = '"' + title[0:] + '"'
+        image = recipe.get('image')
         servings = recipe.get('servings')
         # servings = '"' + servings[1:-2] + '"'
         readyInMinutes = recipe.get('readyInMinutes')
@@ -41,8 +42,8 @@ def api_call(cuisine):
             ingredients_list.append(ingredient['original'])
         # ingredients = '"' + ingredients[1:-2] + '"'
         new_dict[f'recipe{i}'] = {
-        
         "title" : title,
+        "image": image,
         "cuisine" : cuisine,
         "servings" : servings,
         "readyInMinutes" : readyInMinutes,

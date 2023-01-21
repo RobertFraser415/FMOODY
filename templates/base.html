@@ -37,7 +37,7 @@
         <a class="navbar-brand" href="#">
           <img src="/static/css/img/dine sign.png" width="150" height="100" alt="mmm Foodie">
         </a>
-        <a class=" glow navbar-brand" href="#">MmMmmFoody</a>
+        <a class=" glow navbar-brand" href="#">MmMmmFoodie</a>
         <!-- <img src="/static/img/ubermelon-logo.png" alt="" width="30" height="24"> -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -45,14 +45,20 @@
         <div class="collapse navbar-collapse center" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <a class="nav-link active" aria-current="page" href="/">Select Cuisine</a>
             </li>
             {% if 'user_email' not in session %}
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/favorites">Favorites</a>
+            </li>
             
-            {% else %}
+            {% elif 'user_email.favorites'%}
+            <li class="nav-item">
+              <a class="nav-link" href="/favorites">Favorites</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="/logout">Logout</a>
             </li>
@@ -98,7 +104,7 @@
     
       <!-- Copyright -->
       <div class="footer-copyright text-center py-3">© 2023 Copyright:
-        <a href="/"> mmmMMMFoody.com</a>
+        <a href="/"> mmmMMMFoodie.com</a>
       </div>
       <!-- Copyright -->
     

@@ -26,8 +26,9 @@ with server.app.app_context():
         playlist = cuisine_playlist.get('playlist_id')
 
         for recipe in recipes:
-            title, cuisine, servings, readyInMinutes, ingredients, instructions = (
+            title, image, cuisine, servings, readyInMinutes, ingredients, instructions = (
                 recipes[recipe].get('title'),
+                recipes[recipe].get('image'),
                 recipes[recipe].get('cuisine'),
                 recipes[recipe].get('servings'),
                 recipes[recipe].get('readyInMinutes'),
@@ -35,7 +36,7 @@ with server.app.app_context():
                 recipes[recipe].get('instructions')
             )
             db_recipe = crud.create_recipe(
-                title, cuisine, servings, readyInMinutes, ingredients, instructions, playlist)
+                title, image, cuisine, servings, readyInMinutes, ingredients, instructions, playlist)
             recipes_in_db.append(db_recipe)
 
         cuisines_in_db = []

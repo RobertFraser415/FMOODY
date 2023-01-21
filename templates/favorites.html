@@ -1,15 +1,158 @@
-{% extends 'base.html'%}
+{% extends 'base.html'%} {% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h3 class="center">Ready to Explore Cuisine?</h3>
 
-{% block body %}
-<h1>THIS IS THE FAVORITES PAGE</h1>
-{% if favorites %}
-{%  for fav in favorites  %}
+      <form action="/" methods="get" class="center">
+        <button class="button center glow" type="submit">
+          Go To Select A Cuisine
+        </button>
+      </form>
+    </div>
+    <div class="col-sm">
+      <h3 class="center">Want to add your own recipe ?</h3>
+      <form action="/add_recipe" method="POST">
+        <button
+          type="button"
+          class="button btn btn-primary sign-up-btn glow add-my-own"
+          data-bs-toggle="modal"
+          data-bs-target="#recipe_modal"
+        >
+          Add My Own Recipe!
+        </button>
+      </form>
+    </div>
+  </div>
 
-<a>{{ fav.recipe.title }}</a>
-<form  action="/recipe_player" method="POST">
-<button id = "recipe"  name="recipe" class="button recipeButton" type="submit" value="{{ fav.recipe.title }}">"{{ fav.recipe.title }}"</button>
-</form>
+  <h1 class="center">THESE ARE YOU FAVORITES</h1>
+  {% if favorites %} {% for fav in favorites %}
+  <div class="center">
+    <a>{{ fav.recipe.title }}</a>
+    <img src="{{ fav.recipe.image }}" alt="" />
+    <form action="/recipe_player" method="POST">
+      <button
+        id="recipe"
+        name="recipe"
+        class="button center"
+        type="submit"
+        value="{{ fav.recipe.title }}"
+      >
+        {{ fav.recipe.title }}
+      </button>
+    </form>
+  </div>
+  {% endfor %} {% endif %}
 
-{%  endfor %}
-{% endif %}
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="recipe_modal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Save A Recipe to your Favorites and add it to the database! NOM NOM
+            NOM
+          </h5>
+        </div>
+        <div class="modal-body">
+          <form action="/save_recipe" method="post">
+            <div class="form-group">
+              <label for="title-form">Title</label>
+              <input
+                type="name"
+                class="form-control"
+                name="title-form"
+                id="title-form"
+              />
+            </div>
+            <div class="file-upload-wrapper">
+              <label for="image-form">Add an image</label>
+              <input
+                type="file"
+                id="image-form"
+                class="file-upload"
+                name="image-form"
+              />
+            </div>
+            <div>
+              <label for="cuisine-form">Choose cuisine:</label>
+
+              <select
+                id="cuisine-form"
+                name="cuisine-form"
+                class="form-control form-control-lg"
+              >
+                <option>African</option>
+                <option>Native American</option>
+                <option>British</option>
+                <option>Cajun</option>
+                <option>Chinese</option>
+                <option>Eastern European</option>
+                <option>European</option>
+                <option>French</option>
+                <option>German</option>
+                <option>Greek</option>
+                <option>Indian</option>
+                <option>Italian</option>
+                <option>Japanese</option>
+                <option>Korean</option>
+                <option>Latin American</option>
+                <option>Mediterranean</option>
+                <option>Mexican</option>
+                <option>Middle Eastern</option>
+                <option>Southern</option>
+                <option>Spanish</option>
+                <option>Thai</option>
+                <option>Vietnamese</option>
+              </select>
+            </div>
+            <div id="servings-form" class="form-outline">
+              <label class="form-label" for="typeNumber">Servings</label>
+              <input type="number" id="typeNu" class="form-control" />
+            </div>
+            <div id="readyInMinutes-form" class="form-outline">
+              <label class="form-label" for="typeNumber"
+                >How many minutes to complete</label
+              >
+              <input type="number" id="typeNumber" class="form-control" />
+            </div>
+            <div id="ingredients-form" class="form-group">
+              <label for="ingredients-text">Ingredients</label>
+              <textarea
+                class="form-control"
+                id="ingredients-text"
+                rows="4"
+              ></textarea>
+            </div>
+
+            <div id="instructions-form" class="form-group">
+              <label for="instructions-text">Instructions</label>
+              <textarea
+                class="form-control"
+                id="instructions-text"
+                rows="4"
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary glow">Submit</button>
+            <!-- <button type="Cancel" class="btn btn-outline-danger">Cancel</button> -->
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

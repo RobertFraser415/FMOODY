@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
 {% block body %}
-<h1>
+<h1 class="center">
     IF YOU WANT TO SAVE FAVORITES 
     CREATE AN ACCOUNT!
 </h1>
 
 <!--  REDIRECT TO SIGN UP PAGE BUTTON HERE -->
 
-
+<div class="center">
 <form action="/" method="get">
-    <button class="button glow" type="submit" name="as_guest" class="btn btn-info">CONTINUE AS A GUEST</button>
+    <button class="button glow center" type="submit" name="as_guest" class="btn btn-info">CONTINUE AS A GUEST</button>
   </form>  
 
   <h5 class="text-uppercase text-center center">MmMmmFoody</h5>
 
-<button type="button" class="glow btn btn-primary sign-up-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="glow btn btn-primary sign-up-btn center" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Sign Up For an Account!
 </button>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -45,8 +46,11 @@
             <label for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
           </div>
+          <div class="center">
           <button type="submit" class="center glow btn btn-primary">Submit</button>
-          <button type="Cancel" class="btn btn-outline-danger">Cancel</button>
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+          
+        </div>
         </form>
 
       </div>
