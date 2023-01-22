@@ -29,7 +29,7 @@
   {% if favorites %} {% for fav in favorites %}
   <div class="center">
     <!-- <a>{{ fav.recipe.title }}</a> -->
-    <img class='center' src="{{ fav.recipe.image }}" alt="" />
+    
     <form action="/recipe_player" method="POST">
       <button
         id="recipe"
@@ -37,7 +37,7 @@
         class="button center"
         type="submit"
         value="{{ fav.recipe.title }}"
-      >
+      ><img class='center' src="{{ fav.recipe.image }}" alt="" />
         {{ fav.recipe.title }}
       </button>
     </form>
