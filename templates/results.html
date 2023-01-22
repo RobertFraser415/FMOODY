@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block body %}
 
+<div class="select_background" style="background-image: url('/static/css/img/turq-cooking.jpeg')">
 <h1 class="center" id="'select-a-recipe">Now lets choose a recipe!</h1>
 
 {% for recipe in recipes %}
@@ -7,7 +8,7 @@
   <a>{{ recipe['title'] }}</a>
   <form action="/recipe_player" method="POST">
     <div class="center glow">
-      <img class="result_image" src="{{ recipe['image'] }}" alt="" />
+      
       <button
         id="recipe"
         name="recipe"
@@ -15,7 +16,8 @@
         type="submit"
         value="{{ recipe['title'] }}"
       >
-        "{{ recipe['title'] }}"
+      "{{ recipe['title'] }}"
+      <img class="result_image" src="{{ recipe['image'] }}" alt="" />
       </button>
     </div>
   </form>
@@ -39,6 +41,7 @@
       </form>
     </div>
   </div>
+</div>
 
   {% endblock %}
   <!-- <script>

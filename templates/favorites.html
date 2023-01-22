@@ -37,8 +37,9 @@
         class="button center"
         type="submit"
         value="{{ fav.recipe.title }}"
-      ><img class='center' src="{{ fav.recipe.image }}" alt="" />
-        {{ fav.recipe.title }}
+        >
+            {{ fav.recipe.title }}
+        <img class='center result_image' src="{{ fav.recipe.image }}" alt="" />
       </button>
     </form>
   </div>
