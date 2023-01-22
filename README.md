@@ -67,10 +67,10 @@ python3 flask_app.py
 Navigate to localhost:5000
 ```
 ## Contact 
-Robert Fraser: robert.fraser876@gmail.com
-LinkedIn: https://www.linkedin.com/in/robertfraser415
-Project Repo Link: https://github.com/RobertFraser415/fmoody.git
-Live Project Link:    //aws or heroku here <<<<<<<>>>>>>>//
+* Robert Fraser: robert.fraser876@gmail.com
+* LinkedIn: https://www.linkedin.com/in/robertfraser415
+* Project Repo Link: https://github.com/RobertFraser415/fmoody.git
+* Live Project Link:    //aws or heroku here <<<<<<<>>>>>>>//
 
 
 
@@ -79,12 +79,12 @@ Live Project Link:    //aws or heroku here <<<<<<<>>>>>>>//
 
    screen recording technologies of .gif   also embed .gifs
         # gif makeer   
-    how to install    requirmtents .txt etc 
-
-    markdown cheet sheet 
-    push to git hub it is homepage fo repo
 
 
-    customize pinned repositories 
+   difficulties 
+    Spoonacular API was difficult to even read with results from the api but after creating variables for the hard to get to information I was able to work with the data. Once I had finally started getting the correct data to print for me, I started an architecture that was primarily sending information through forms through my buttons. However the format of a string was unable to be transformed in the way I needed. This lead to an entire restructuring of the architecture half way through the project weeks. I was able to go back and redesign the data flow and by creating my own transformed objects into the types I needed I was able to finally reach my MVP. Styling was fun and I enjoyed working with the design tools from lecture and also exploring CSS.
 
-    make project public 
+
+
+
+
