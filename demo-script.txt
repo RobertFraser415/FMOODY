@@ -1,0 +1,28 @@
+Mm Mmm Foodie
+
+Welcome to Mm Mm Foody
+
+The app that lets you explore the world through music and cuisine. 
+
+* A user can select a cuisine to explore
+    
+* A user can then recieve some random recipes to choose from.
+
+* Then a user is populated the recipe information and a player from spotify with a playlist that corresponds to the tradional music from that cuisines region.
+
+* Users can create an account with an email and password or search for recipes as a guest. 
+    
+* Registered users can save their favorites.
+
+* Registered users can create a recipe to add to the datab
+
+* This is a full stack application in Python Flask with Jinja2 , HTML5 & Javscript with PostgresQL database.
+    I styled it with custom CSS and bootstrap. It uses spoonacular API and some hard coding I got off spotify.  
+    Python Flask 
+
+
+## Technology Stack
+   * **Backend:** Python, SQLAlchemy, Jinja2, Flask
+   * **Frontend:** HTML5, CSS3, Bootstrap5, JavaScript
+   * **Database:** PostgreSQL
+   * **API's:** Spoonacular
