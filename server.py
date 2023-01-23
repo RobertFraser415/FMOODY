@@ -116,9 +116,9 @@ def save_recipe():
             db.session.add(favorite)
             db.session.commit()
         
-        print(f' FAVORITE =========== = {favorite}')
-        favorites = crud.get_user_favorites(user_id)
-        print(f'%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{favorites}')
+            print(f' FAVORITE =========== = {favorite}')
+            favorites = crud.get_user_favorites(user_id)
+            print(f'%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{favorites}')
         return render_template('favorites.html', favorites=favorites)
     else:
         return redirect('/make_one')
@@ -257,7 +257,6 @@ def add_recipe():
             db.session.add(added_recipe)
             db.session.commit()
             favorites = crud.get_user_favorites(user_id)
-            print(f'%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{favorites}')
         return render_template('favorites.html', favorites=favorites)
     else:
         return redirect('/make_one')
