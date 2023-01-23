@@ -39,7 +39,11 @@
         value="{{ fav.recipe.title }}"
       >
         {{ fav.recipe.title }}
-        <img class="center result_image" src="{{ fav.recipe.image }}" alt="" />
+        {% if not fav.recipe.image %}
+        <img class="center result_image" src="/static/css/img/eating.jpeg" alt="people eating" />
+        {% else %}
+        <img class="center result_image" src="{{ fav.recipe.image }}" alt="recipe photo" />
+        {% endif %}
       </button>
     </form>
   </div>
@@ -76,21 +80,14 @@
             </div>
             <div class="file-upload-wrapper">
               <label for="image-form">Add an image</label>
-              <!-- <input
-                type="file"
-                id="image-form"
-                class="file-upload"
-                name="image-form"
-                required
-              /> -->
               <input
                 type="file"
-                name="image-form"
-                class="file-upload"
                 id="image-form"
-                required
-                data-mdb-file-upload="file-upload"
+                class="file-upload"
+                name="image-form"
+              
               />
+             
               
             </div>
             <div>

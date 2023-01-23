@@ -72,7 +72,7 @@ class Recipe(db.Model):
 
     recipe_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    image = db.Column(db.String(100))
+    image = db.Column(db.String(300))
     cuisine = db.Column(db.String(100), nullable=False)
     servings = db.Column(db.Integer, nullable=False)
     readyInMinutes = db.Column(db.Integer, nullable=False)

@@ -4,7 +4,7 @@
 Music and Food bring pleasure to our mind, body, and spirit, creating a sense of connection and harmony with the physical world. Music and Food are an essential element of culture. Sharing music from one culture to another gives people an insight into another way of life. Sharing foods has lead to a more globalized and diverse diet. Music can unite people of various cultures forming valuable connections and strengthening unity.
 This is even more crucial during times of conflict when other methods of interaction are rendered impractical.
 
-"Music teaches children about their heritage, foster language development, and present new values. Educating children about different cultures promotes socialization, tolerance, and openness. These characteristics can lead to an appreciation of diversity and assist in establishing new relationships."
+"Music teaches children about their heritage, fosters language development, and present new values. Educating children about different cultures promotes socialization, tolerance, and openness. These characteristics can lead to an appreciation of diversity and assist in establishing new relationships."
    -Starbright Books "Engaging Children in Multicultural Music" - 2021
 
 The vision of this project is to create a platform where these shared recipes and music from different cultures can come to explore each other.  I have found the most cultural education and understanding from experiencing a cultures food and music. MmMmmFoodie's mission is to bring the world together through diverse cultures bringing music and shared recipes! Bon Apetite! 
@@ -70,7 +70,7 @@ Obtaining and using API Keys:
 
 Running the application:
 ```
-python3 flask_app.py
+python3 server.py
 Navigate to localhost:5000
 ```
 ## Contact 

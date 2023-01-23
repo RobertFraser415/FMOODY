@@ -247,6 +247,7 @@ def add_recipe():
         # print('***********************************************', user_id, recipe_id)
         
         recipe_to_add = crud.create_recipe(title, image, cuisine, servings, readyInMinutes, ingredients, instructions, playlist='37i9dQZF1DX4UtSsGT1Sbe')
+        print(image, "*********************************************")
         if recipe_to_add not in db.session:
             db.session.add(recipe_to_add)
             db.session.commit()
