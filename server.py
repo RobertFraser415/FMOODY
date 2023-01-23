@@ -107,13 +107,15 @@ def save_recipe():
         user_id = user.user_id
         # print('\n\n\n',user_id, '\n\n\n')
         recipe_id = request.form.get('recipe')
+        print(recipe_id)
         print(request.form)
-        # print('***********************************************', user_id, recipe_id)
+        print('***********************************************', user_id, recipe_id)
         
         favorite = crud.create_favorite(user_id, recipe_id)
-        db.session.add(favorite)
-        db.session.commit()
-       
+        if favorite not in db.session:
+            db.session.add(favorite)
+            db.session.commit()
+        
         print(f' FAVORITE =========== = {favorite}')
         favorites = crud.get_user_favorites(user_id)
         print(f'%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{favorites}')
@@ -159,8 +161,9 @@ def show_favorites():
     # if logged in , render template favorite else not logged in route to make one
     if email:
         current_user = crud.get_user_by_email(email)
-        favorites = [current_user.favorites]
+        favorites = current_user.favorites
         print(f'favorites {favorites}')
+        # print(f'favorites {favorites.recipe}')
         return render_template("favorites.html", email=email, favorites=favorites)
     else:
         return render_template("make_one.html")
@@ -220,39 +223,44 @@ def logout():
 #     return render_template('favorites.html', favorite=favorite)
 
 
-# @app.route("/add_recipe", methods=['POST'])
-# def add_recipe():
-#     # """saves a favorite recipe to view on the favorites page """
-#     """saves a favorite recipe to the database then redirect to favorites page """
-#         # favorite = Favorite()  create a saved recipe  in database
-#     # need to check if user has already saved this previously no doubles
-#     # return will be  a message saying saved successfulyy
-#     if 'user_email' in session:
-#         user = crud.get_user_by_email(session['user_email'])
-#         user_id = user.user_id
-#         # recipe_id = recipe.recipe_id
-#         title = request.form.get("title-form")
-#         cuisine = request.form.get("cuisine-form")
-#         servings = request.form.get("servings-form")
-#         readyInMinutes = request.form.get("readyInMinutes-form")
-#         ingredients = request.form.get("ingredients-form")
-#         instructions = request.form.get("instructions-form")
+@app.route("/add_recipe", methods=['POST'])
+def add_recipe():
+    # """saves a favorite recipe to view on the favorites page """
+    """saves a recipe to the database then redirect to favorites page """
+        # favorite = Favorite()  create a saved recipe  in database
+    # need to check if user has already saved this previously no doubles
+    # return will be  a message saying saved successfulyy
+    if 'user_email' in session:
+        user = crud.get_user_by_email(session['user_email'])
+        user_id = user.user_id
+        # recipe_id = recipe.recipe_id
+        title = request.form.get("title-form")
+        image = request.form.get("image-form")
+        cuisine = request.form.get("cuisine-form")
+        servings = request.form.get("servings-form")
+        readyInMinutes = request.form.get("readyInMinutes-form")
+        ingredients = request.form.get("ingredients-form")
+        instructions = request.form.get("instructions-form")
 
-#         recipe_id = request.form.get('recipe')
-#         # print(request.form)
-#         # print('***********************************************', user_id, recipe_id)
-#         recipe_to_add = crud.create_recipe(title, cuisine, servings, readyInMinutes, ingredients, instructions, playlist='37i9dQZF1DX4UtSsGT1Sbe')
-#         db.session.add(recipe_to_add)
-#         db.session.commit()
-
-#         # added_recipe = crud.create_favorite(user_id, recipe_id)
-#         # db.session.add(added_recipe)
-#         # db.session.commit()
-#         favorites = crud.get_user_favorites(user_id)
-#         print(f'%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{favorites}')
-#         return render_template('favorites.html', favorites=favorites)
-#     else:
-#         return redirect('/make_one')
+        recipe_id = request.form.get('recipe')
+        print(request.form)
+        # print('***********************************************', user_id, recipe_id)
+        
+        recipe_to_add = crud.create_recipe(title, image, cuisine, servings, readyInMinutes, ingredients, instructions, playlist='37i9dQZF1DX4UtSsGT1Sbe')
+        if recipe_to_add not in db.session:
+            db.session.add(recipe_to_add)
+            db.session.commit()
+        # crud.create_favorite(user_id, recipe.recipe_id)
+            
+        added_recipe = crud.create_favorite(user_id, recipe_to_add.recipe_id)
+        if added_recipe not in db.session:
+            db.session.add(added_recipe)
+            db.session.commit()
+            favorites = crud.get_user_favorites(user_id)
+            print(f'%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{favorites}')
+        return render_template('favorites.html', favorites=favorites)
+    else:
+        return redirect('/make_one')
 
 
 if __name__ == "__main__":

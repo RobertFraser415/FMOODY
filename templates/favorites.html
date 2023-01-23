@@ -29,7 +29,7 @@
   {% if favorites %} {% for fav in favorites %}
   <div class="center">
     <!-- <a>{{ fav.recipe.title }}</a> -->
-    
+
     <form action="/recipe_player" method="POST">
       <button
         id="recipe"
@@ -37,9 +37,9 @@
         class="button center"
         type="submit"
         value="{{ fav.recipe.title }}"
-        >
-            {{ fav.recipe.title }}
-        <img class='center result_image' src="{{ fav.recipe.image }}" alt="" />
+      >
+        {{ fav.recipe.title }}
+        <img class="center result_image" src="{{ fav.recipe.image }}" alt="" />
       </button>
     </form>
   </div>
@@ -63,7 +63,7 @@
           </h5>
         </div>
         <div class="modal-body">
-          <form action="/save_recipe" method="post">
+          <form action="/add_recipe" method="post">
             <div class="form-group">
               <label for="title-form">Title</label>
               <input
@@ -71,16 +71,27 @@
                 class="form-control"
                 name="title-form"
                 id="title-form"
+                required
               />
             </div>
             <div class="file-upload-wrapper">
               <label for="image-form">Add an image</label>
-              <input
+              <!-- <input
                 type="file"
                 id="image-form"
                 class="file-upload"
                 name="image-form"
+                required
+              /> -->
+              <input
+                type="file"
+                name="image-form"
+                class="file-upload"
+                id="image-form"
+                required
+                data-mdb-file-upload="file-upload"
               />
+              
             </div>
             <div>
               <label for="cuisine-form">Choose cuisine:</label>
@@ -89,6 +100,7 @@
                 id="cuisine-form"
                 name="cuisine-form"
                 class="form-control form-control-lg"
+                required
               >
                 <option>African</option>
                 <option>Native American</option>
@@ -116,13 +128,24 @@
             </div>
             <div id="servings-form" class="form-outline">
               <label class="form-label" for="typeNumber">Servings</label>
-              <input type="number" id="typeNu" class="form-control" />
+              <input
+                required
+                type="number"
+                name="servings-form"
+                class="form-control"
+              />
             </div>
             <div id="readyInMinutes-form" class="form-outline">
               <label class="form-label" for="typeNumber"
                 >How many minutes to complete</label
               >
-              <input type="number" id="typeNumber" class="form-control" />
+              <input
+                required
+                type="number"
+                name="readyInMinutes-form"
+                id="readyInMinutes-form"
+                class="form-control"
+              />
             </div>
             <div id="ingredients-form" class="form-group">
               <label for="ingredients-text">Ingredients</label>
@@ -130,6 +153,7 @@
                 class="form-control"
                 id="ingredients-text"
                 rows="4"
+                name="ingredients-form"
               ></textarea>
             </div>
 
@@ -139,6 +163,8 @@
                 class="form-control"
                 id="instructions-text"
                 rows="4"
+                name="instructions-form"
+                required
               ></textarea>
             </div>
             <button type="submit" class="btn btn-primary glow">Submit</button>
