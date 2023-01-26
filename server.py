@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash, session, redirect, jsonify
-from model import connect_to_db, db, User
+from model import connect_to_db, db, User, Favorite
 import crud
 import api_call
 import json
@@ -98,7 +98,7 @@ def show_recipe_playlist():
 @app.route("/save_recipe", methods=['POST'])
 def save_recipe():
     """saves a favorite recipe to view on the favorites page """
-    flash('Recipe was successfully saved to your favorites! YAY!!')
+   
     # favorite = Favorite()  create a saved recipe  in database
     # need to check if user has already saved this previously no doubles
     # return will be  a message saying saved successfulyy
@@ -110,15 +110,21 @@ def save_recipe():
         print(recipe_id)
         print(request.form)
         print('***********************************************', user_id, recipe_id)
+        # favorite.query.filter_by()
         
-        favorite = crud.create_favorite(user_id, recipe_id)
-        if favorite not in db.session:
-            db.session.add(favorite)
-            db.session.commit()
+        if recipe_id:
+            fav = Favorite.query.filter(Favorite.recipe_id == recipe_id, Favorite.user_id == user_id).first()
+            if not fav:
+                favorite = crud.create_favorite(user_id, recipe_id) 
+        # query fav table chekin giving the user id and recipe id already exsist 
+        # if it exsists the ndo line 122 
+                db.session.add(favorite)
+                db.session.commit()
+                flash('Recipe was successfully saved to your favorites! YAY!!')
+            else:
+                flash(" Whoops you already added that one! ")
         
-            print(f' FAVORITE =========== = {favorite}')
-            favorites = crud.get_user_favorites(user_id)
-            print(f'%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%{favorites}')
+        favorites = crud.get_user_favorites(user_id)
         return render_template('favorites.html', favorites=favorites)
     else:
         return redirect('/make_one')
@@ -235,7 +241,7 @@ def add_recipe():
         user_id = user.user_id
         # recipe_id = recipe.recipe_id
         title = request.form.get("title-form")
-        image = request.form.get("image-form")
+        image = None
         cuisine = request.form.get("cuisine-form")
         servings = request.form.get("servings-form")
         readyInMinutes = request.form.get("readyInMinutes-form")
@@ -247,7 +253,6 @@ def add_recipe():
         # print('***********************************************', user_id, recipe_id)
         
         recipe_to_add = crud.create_recipe(title, image, cuisine, servings, readyInMinutes, ingredients, instructions, playlist='37i9dQZF1DX4UtSsGT1Sbe')
-        print(image, "*********************************************")
         if recipe_to_add not in db.session:
             db.session.add(recipe_to_add)
             db.session.commit()

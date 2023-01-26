@@ -2,27 +2,39 @@ Mm Mmm Foodie
 
 Welcome to Mm Mm Foody
 
-The app that lets you explore the world through music and cuisine. 
+Mm Mmm Foodie
+30 second intro - 
+Good Afternoon! I’m Robert Fraser coming to you from San Francisco, CA.
+As an engineer I’m interested in full stack applications, mobile, finance, security, cryptography and smart contracts for web3.
+My current career goal is to get hired as a software engineer and become a Senior Engineer within 5 years.
+I hope to incorporate finance and smart contracts into my training and work during this time.
+Before deciding to become a software engineer I co-owned and operated a Tier-2 Recreational Cannabis production and processing plant for the state of WA.
+In my personal time I’m a musician and performance artist. 
 
-* A user can select a cuisine to explore
-    
-* A user can then recieve some random recipes to choose from.
+Now that you know a little about me, this is :  (emphasis) Mm Mm Foodie >( emphasis mms)
+The app that lets you learn about and explore the world through music and cuisine. 
 
-* Then a user is populated the recipe information and a player from spotify with a playlist that corresponds to the tradional music from that cuisines region.
+Music teaches children and adults about their heritage, fosters language development, and presents new values. 
+Educating everyone about different cultures promotes socialization, tolerance, and openness. 
+These characteristics can lead to an appreciation of diversity and assist in establishing new relationships. 
+With Mm Mm Foodie I wanted to create an easy platform for sharing the traditional music and recipes from different cultures.
 
-* Users can create an account with an email and password or search for recipes as a guest. 
+DEMO
+* A user can select a cuisine to explore. They are populated from saved recipes from Spoonacular API in a PostgresQL database.
+
+* A user can then receive some random recipes to choose from, using a Spoonacular API call     and python requests library.
+
+* Then a user is populated the recipe information and a player from spotify with a playlist that corresponds to the traditional music from that cuisine’s region. 
+So you can listen while you prepare the dish.  
+I created a playlist manually for each cuisine with playlist id’s from Spotify.
+
+* Users can create an account with an email and password.	
+Here I am using Jinja templating and the session library to determine if the user is in session and saves the user information to the PSQL database.
     
 * Registered users can save their favorites.
+Favorites saved to a new table related to that user in PSQL  database 
 
-* Registered users can create a recipe to add to the datab
+* Registered users can create a recipe to add to the database,  (( photo issue?)) 
+Using the python Request and session libraries it  saves to the PSQL DB and as a favorite.
 
-* This is a full stack application in Python Flask with Jinja2 , HTML5 & Javscript with PostgresQL database.
-    I styled it with custom CSS and bootstrap. It uses spoonacular API and some hard coding I got off spotify.  
-    Python Flask 
-
-
-## Technology Stack
-   * **Backend:** Python, SQLAlchemy, Jinja2, Flask
-   * **Frontend:** HTML5, CSS3, Bootstrap5, JavaScript
-   * **Database:** PostgreSQL
-   * **API's:** Spoonacular
+* It is styled with custom CSS and Bootstrap CDN. 
