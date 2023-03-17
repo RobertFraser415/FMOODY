@@ -30,6 +30,7 @@
   .select_background {
     background-image: url('/static/css/img/World MAp topographical.jpeg');
     width: auto;
+    height: auto;
   }
   .blk-etched-letters {
   /* h1, h2, h3, h4, h5, .h { */
